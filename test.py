@@ -64,6 +64,11 @@ def test(data,
 
     # Half
     half = device.type != 'cpu' and half_precision  # half precision only supported on CUDA
+
+    if(device.type != 'cpu'):
+        compute_capability = torch.cuda.get_device_capability(device=device)    
+        half = (device.type != 'cpu') and (compute_capability[0] >= 8)  # half precision only supported on CUDA
+
     if half:
         model.half()
 

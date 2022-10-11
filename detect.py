@@ -30,6 +30,10 @@ def detect(save_img=False):
     device = select_device(opt.device)
     half = device.type != 'cpu'  # half precision only supported on CUDA
 
+    if(device.type != 'cpu'):
+        compute_capability = torch.cuda.get_device_capability(device=device)    
+        half = (device.type != 'cpu') and (compute_capability[0] >= 8)  # half precision only supported on CUDA
+
     # Load model
     model = attempt_load(weights, map_location=device)  # load FP32 model
     stride = int(model.stride.max())  # model stride
