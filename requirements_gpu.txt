@@ -40,3 +40,5 @@ thop  # FLOPs computation
 
 # LineBot -------------------------------------
 line-bot-sdk
+Flask
+
