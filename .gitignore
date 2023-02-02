@@ -38,6 +38,10 @@ data/images/*
 
 results*.csv
 
+# Potato project
+detect_2.py
+!events/*.json
+
 # Datasets -------------------------------------------------------------------------------------------------------------
 coco/
 coco128/
