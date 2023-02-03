@@ -1,0 +1,11 @@
+
+# train and val data as 1) directory: path/images/, 2) file: path/images.txt, or 3) list: [path1/images/, path2/images/]
+train: data/potato_dataset/images/train  
+val: data/potato_dataset/images/val
+test: data/potato_dataset/images/test
+
+# number of classes
+nc: 8
+
+# class names
+names: [ 'potato', 'sprout', 'green', 'scab', 'black', 'hole', 'disformation', 'mold' ]
