@@ -12,11 +12,11 @@ from PIL import Image
 from models.experimental import attempt_load
 from utils.general import non_max_suppression
 
-WEIGHTS = "./runs/train/yolov7-potato/weights/best.pt"
+WEIGHTS = "best_potato_20230201.pt"
 DEVICE = "cuda"
 IMAGE_SIZE = 640
 
-CLASSES = ['potato', 'sprout', 'green', 'scab', 'black', 'hole', 'disformation', 'mold']
+CLASSES = ['potato', 'sprout', 'green', 'scab', 'black', 'hole', 'deformation', 'mold']
 
 # Load YOLOv7
 model = attempt_load(WEIGHTS, map_location=DEVICE)
