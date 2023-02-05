@@ -8,4 +8,4 @@ test: data/potato_dataset/images/test
 nc: 8
 
 # class names
-names: [ 'potato', 'sprout', 'green', 'scab', 'black', 'hole', 'disformation', 'mold' ]
+names: [ 'potato', 'sprout', 'green', 'scab', 'black', 'hole', 'deformation', 'mold' ]
