@@ -12,11 +12,12 @@ from PIL import Image
 from models.experimental import attempt_load
 from utils.general import non_max_suppression
 
-WEIGHTS = "best_potato_20230201.pt"
+WEIGHTS = "best_corr_tiny_20230205.pt"
 DEVICE = "cuda"
 IMAGE_SIZE = 640
 
 CLASSES = ['potato', 'sprout', 'green', 'scab', 'black', 'hole', 'deformation', 'mold']
+CLASSES_zh = ["馬鈴薯", "發芽", "發綠", "瘡痂", "發黑", "洞", "畸形", "白絹病"]
 
 # Load YOLOv7
 model = attempt_load(WEIGHTS, map_location=DEVICE)
@@ -50,15 +51,13 @@ def download_RealTime(event):
 
 
 # image message type 
-def save_img(event):
-    global filename 
+def save_img(event, filename):
+    # global filename 
     message_content = line_bot_api.get_message_content(event.message.id)
     print(f"Message type: {event.message.type}\tMessage id: {event.message.id}")
 
     if not os.path.exists("./Images"):
         os.mkdir("./Images")
-
-    filename = f"./Images/{event.message.id}.{message_content.content_type.split('/')[1].lower()}"
     
     with open(filename, 'wb') as fd:
         for chunk in message_content.iter_content():
@@ -75,7 +74,7 @@ def save_img(event):
 
 
 # Predict by YOLO
-def yolo_predict(image, image_size=640):
+def yolo_predict_text_save(filename, image, event, message_content, image_size=640):
     image = np.asarray(image)
     
     # Resize image to the inference size
@@ -97,31 +96,223 @@ def yolo_predict(image, image_size=640):
     pred[:, [0, 2]] *= ori_w / image_size
     pred[:, [1, 3]] *= ori_h / image_size
     
-    return pred
+    # return pred
 
-# # Load image
-# image = Image.open(filename)
-
-# # Predict
-# pred = yolo_predict(image)
-
-# # Visualize the result 
-# image = cv2.imread(filename)  # queryImage
-# for x1, y1, x2, y2, conf, class_id in pred:
-#     text = f"{CLASSES[int(class_id)]}  {conf:.2f}"
-#     # print(x1, y1, x2,  y2, conf, class_id) 
-#     x1, y1, x2, y2 = int(x1), int(y1), int(x2), int(y2)
-#     # print(x1, y1, x2, y2)
-#     cv2.rectangle(image, (x1, y1), (x2, y2), (0, 255, 0), 4)
-#     cv2.putText(image, text, (x1, y1), 2, 1, (30,250,255), 2)
-#     # print(f"{CLASSES[int(class_id)]}  {conf:.2f}")
-
-# # cv2.imshow('Predict', image)
-# cv2.imwrite(filename, image)
-
-# # cv2.waitKey(0)
-# # cv2.destroyAllWindows()
-# # cv2.waitKey(1)
-
-
+    ## Visualize the result 
+    image = cv2.imread(filename)  # queryImage
+    result_text = "影像偵測到可能有：\n"
+    i = 1
+    pred_list = []  
+    # potato_range_list = []
+    # print(pred)
     
+    for x1, y1, x2, y2, conf, class_id in pred:
+        # if conf >= 0.4:
+        text = f"{CLASSES[int(class_id)]}  {conf:.2f}"
+        # print(x1, y1, x2,  y2, conf, class_id) 
+        x1, y1, x2, y2 = int(x1), int(y1), int(x2), int(y2)
+        # print(x1, y1, x2, y2)
+        cv2.rectangle(image, (x1, y1), (x2, y2), (0, 255, 0), 4)
+        cv2.putText(image, text, (x1, y1), 2, 1, (30,250,255), 2)
+        # print(f"{CLASSES[int(class_id)]}  {conf:.2f}")
+        if int(class_id) == 0:
+            # coordinate = (x1, y1, x2, y2)
+            # potato_range_list.append(coordinate)
+            pred_list.append(int(class_id))
+
+        else:
+            # for j in potato_range_list:
+            #     if ((j[0] <= x1 <= j[2]) and (j[1] <= y1 <= j[3])) or ((j[0] <= x2 <= j[2]) and (j[1] <= y2 <= j[3])) or ((j[0] <= x1 <= j[2]) and (j[1] <= y2 <= j[3])) or ((j[0] <= x2 <= j[2]) and (j[1] <= y1 <= j[3])):
+                    pred_list.append(int(class_id))
+                    result_text += f"{i}. {CLASSES_zh[int(class_id)]}  (Conf: {conf:.2f})\n"
+                    i += 1           
+
+        # pred_list.append(int(class_id))
+    # print(potato_range_list)
+    # print(result_text)
+    # print(pred_list)
+
+    # cv2.imshow('Predict', image)
+    # # cv2.waitKey(0)
+    # # cv2.destroyAllWindows()
+    # # cv2.waitKey(1)
+    if not os.path.exists("./static"):
+        os.mkdir("./static")
+    pred_img_file = f"./static/{event.message.id}.{message_content.content_type.split('/')[1].lower()}"
+    cv2.imwrite(pred_img_file, image)
+
+    if {0} == set(pred_list):
+        line_bot_api.reply_message(event.reply_token,TextSendMessage(text="辨識完成，AI目前沒有偵測到瑕疵"))
+    elif {0} <= set(pred_list):
+        line_bot_api.reply_message(event.reply_token,TextSendMessage(text=result_text))
+    elif 0 not in pred_list:
+        line_bot_api.reply_message(event.reply_token,TextSendMessage(text="沒有偵測到馬鈴薯，請重新拍照"))
+
+
+def yolo_predict_photo_save(filename, image, event, message_content, image_size=640):
+    try:
+        user_profile = get_profile(event)
+        group_summary = get_group_summary(event)
+        group_count = get_group_members_count(event)
+    except:
+        user_profile = get_profile(event)
+    finally:
+        pass
+    image = np.asarray(image)
+    
+    # Resize image to the inference size
+    ori_h, ori_w = image.shape[:2]
+    image = cv2.resize(image, (image_size, image_size))
+    
+    # Transform image from numpy to torch format
+    image_pt = torch.from_numpy(image).permute(2, 0, 1).to(DEVICE)
+    image_pt = image_pt.float() / 255.0
+    
+    # Infer
+    with torch.no_grad():
+        pred = model(image_pt[None], augment=False)[0]
+    
+    # NMS
+    pred = non_max_suppression(pred)[0].cpu().numpy()
+    
+    # Resize boxes to the original image size
+    pred[:, [0, 2]] *= ori_w / image_size
+    pred[:, [1, 3]] *= ori_h / image_size
+    
+    # return pred
+
+    ## Visualize the result 
+    image = cv2.imread(filename)  # queryImage
+    result_text = "影像偵測到可能有：\n"
+    i = 1
+    pred_list = []  
+    # potato_range_list = []
+    # print(pred)
+    
+    for x1, y1, x2, y2, conf, class_id in pred:
+        # if conf >= 0.4:
+        text = f"{CLASSES[int(class_id)]}  {conf:.2f}"
+        # print(x1, y1, x2,  y2, conf, class_id) 
+        x1, y1, x2, y2 = int(x1), int(y1), int(x2), int(y2)
+        # print(x1, y1, x2, y2)
+        cv2.rectangle(image, (x1, y1), (x2, y2), (0, 255, 0), 4)
+        cv2.putText(image, text, (x1, y1), 2, 1, (30,250,255), 2)
+        # print(f"{CLASSES[int(class_id)]}  {conf:.2f}")
+        if int(class_id) == 0:
+            # coordinate = (x1, y1, x2, y2)
+            # potato_range_list.append(coordinate)
+            pred_list.append(int(class_id))
+
+        else:
+            # for j in potato_range_list:
+            #     if ((j[0] <= x1 <= j[2]) and (j[1] <= y1 <= j[3])) or ((j[0] <= x2 <= j[2]) and (j[1] <= y2 <= j[3])) or ((j[0] <= x1 <= j[2]) and (j[1] <= y2 <= j[3])) or ((j[0] <= x2 <= j[2]) and (j[1] <= y1 <= j[3])):
+                    pred_list.append(int(class_id))
+                    result_text += f"{i}. {CLASSES_zh[int(class_id)]}  (Conf: {conf:.2f})\n"
+                    i += 1           
+
+        # pred_list.append(int(class_id))
+    # print(potato_range_list)
+    # print(result_text)
+    # print(pred_list)
+
+    # cv2.imshow('Predict', image)
+    # # cv2.waitKey(0)
+    # # cv2.destroyAllWindows()
+    # # cv2.waitKey(1)
+    if not os.path.exists("./static"):
+        os.mkdir("./static")
+    pred_img_file = f"./static/{event.message.id}.{message_content.content_type.split('/')[1].lower()}"
+    cv2.imwrite(pred_img_file, image)
+
+    if {0} == set(pred_list):
+        text="辨識完成，AI目前沒有偵測到瑕疵"
+    elif {0} <= set(pred_list):
+        text=result_text
+    elif 0 not in pred_list:
+        text="沒有偵測到馬鈴薯，請重新拍照"
+
+    send_img = ImageSendMessage(  #傳送圖片
+                        original_content_url = f"{end_point}{pred_img_file[1:]}",
+                        preview_image_url = f"{end_point}{pred_img_file[1:]}"
+                    )
+    send_pred_text = TextSendMessage(text=text)
+    try:
+        send_profile = TextSendMessage(  #傳送文字
+                        text = f"""🥔 上傳照片者: {user_profile[0]}
+🥔 UserID: {user_profile[1]}
+🥔 頭像URL: {user_profile[2]}
+🥔 狀態顯示: {user_profile[3]}
+🥔 設定的語言: {user_profile[4]}
+
+🥔 群組名稱: {group_summary[1]}
+🥔 群組id: {group_summary[0]}
+🥔 群組圖像: {group_summary[2]}
+
+❤ 群組人數: {group_count}"""
+                    )
+    except:
+        send_profile = TextSendMessage(  #傳送文字
+                        text = f"❤ 你是{user_profile[0]}\n🥔 UserID: {user_profile[1]}\n🥔 頭像URL: {user_profile[2]}\n\
+🥔 狀態顯示: {user_profile[3]}\n🥔 設定的語言: {user_profile[4]}"
+                    )
+    message = [
+            send_img,
+            send_pred_text,
+            send_profile
+            ]
+    line_bot_api.reply_message(event.reply_token, message)
+
+
+## Get user profile information.
+def get_profile(event):
+    user_id = event.source.user_id
+    profile = line_bot_api.get_profile(user_id)
+    user_display_name = profile.display_name
+    user_id = profile.user_id
+    picture_url = profile.picture_url
+    status_message = profile.status_message
+    language = profile.language
+    user_profile = [user_display_name, user_id, picture_url, status_message, language]
+    print(user_display_name)
+    print(user_id)
+    print(picture_url)
+    print(status_message)
+    print(language)
+    
+    return user_profile
+
+# 取得使用者在群組中的profile
+def get_group_member_profile(event):
+    group_id = event.source.group_id
+    user_id = event.source.user_id
+    profile = line_bot_api.get_group_member_profile(group_id, user_id)
+
+    group_name = profile.display_name
+    group_userID = profile.user_id
+    group_picture_url = profile.picture_url
+    
+    group_member_profile = [group_name, group_userID, group_picture_url]
+    print(profile.display_name)
+    print(profile.user_id)
+    print(profile.picture_url)
+    return group_member_profile
+
+# 取得群組資訊
+def get_group_summary(event):
+    group_id = event.source.group_id
+    summary = line_bot_api.get_group_summary(group_id)
+    print(summary.group_id)
+    print(summary.group_name)
+    print(summary.picture_url)
+    group_summary_id = summary.group_id
+    group_summary_name = summary.group_name
+    group_summary_url = summary.picture_url
+    group_summary = [group_summary_id, group_summary_name, group_summary_url]
+    return group_summary
+
+# 取得群組人數
+def get_group_members_count(event):
+    group_id = event.source.group_id
+    group_count = line_bot_api.get_group_members_count(group_id)
+    print(group_count)
+    return group_count

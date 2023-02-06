@@ -5,10 +5,11 @@ from flask import Flask
 from flask import request, abort
 
 from line_bot_api import *
-from events.basic import detect_event, download_RealTime, save_img, yolo_predict, CLASSES
+from events.basic import detect_event, download_RealTime, save_img, yolo_predict_text_save, yolo_predict_photo_save,\
+     get_group_summary, get_profile, get_group_member_profile, get_group_members_count
 
 from PIL import Image
-import cv2
+# import cv2
 
 app = Flask(__name__)
 
@@ -40,6 +41,21 @@ def handle_message(event):
             download_RealTime(event)
         except:
             line_bot_api.reply_message(event.reply_token,TextSendMessage(text='發生錯誤！'))
+
+    if mtext == '@我的資訊':
+        try:
+            user_profile = get_profile(event)
+            print("取得使用者資訊")
+            send_profile = TextSendMessage(  #傳送文字
+                            text = f"❤ 你是{user_profile[0]}\n🥔 UserID: {user_profile[1]}\n🥔 頭像URL: {user_profile[2]}\n\
+🥔 狀態顯示: {user_profile[3]}\n🥔 設定的語言: {user_profile[4]}"
+                    )
+            line_bot_api.reply_message(event.reply_token, send_profile)
+        except AttributeError as e:
+            print(e)
+        except:
+            line_bot_api.reply_message(event.reply_token,TextSendMessage(text='發生錯誤！'))
+
         
 @handler.add(PostbackEvent)
 def handle_postback(event):
@@ -68,53 +84,21 @@ def handle_message(event):
     try:
         message_content = line_bot_api.get_message_content(event.message.id)
         filename = f"./Images/{event.message.id}.{message_content.content_type.split('/')[1].lower()}"
-        save_img(event)
+        save_img(event, filename)
         # yolo_detect(event)
         # print(filename)
         
         image = Image.open(filename)
         # Predict
-        pred = yolo_predict(image)
-
-        # Visualize the result 
-        image = cv2.imread(filename)  # queryImage
-        result_text = "影像偵測到可能有：\n"
-        i = 1
-        pred_list = []  
-        CLASSES_zh = {0:"馬鈴薯", 1:"發芽", 2:"發綠", 3:"瘡痂", 4:"發黑", 5:"洞", 6:"畸形", 7:"白絹病"}
-        for x1, y1, x2, y2, conf, class_id in pred:
-            text = f"{CLASSES[int(class_id)]}  {conf:.2f}"
-            # print(x1, y1, x2,  y2, conf, class_id) 
-            x1, y1, x2, y2 = int(x1), int(y1), int(x2), int(y2)
-            # print(x1, y1, x2, y2)
-            cv2.rectangle(image, (x1, y1), (x2, y2), (0, 255, 0), 4)
-            cv2.putText(image, text, (x1, y1), 2, 1, (30,250,255), 2)
-            # print(f"{CLASSES[int(class_id)]}  {conf:.2f}")
-            if int(class_id) != 0:
-                result_text += f"{i}. {CLASSES_zh[int(class_id)]}  (Conf: {conf:.2f})\n"
-                i += 1
-            pred_list.append(int(class_id))
-        # print(result_text)
-        # print(pred_list)
-
-        # cv2.imshow('Predict', image)
-        if not os.path.exists("./User_pred"):
-            os.mkdir("./User_pred")
-        pred_img_file = f"./User_pred/{event.message.id}.{message_content.content_type.split('/')[1].lower()}"
-        cv2.imwrite(pred_img_file, image)
-
-        if {0} == set(pred_list):
-            line_bot_api.reply_message(event.reply_token,TextSendMessage(text="辨識完成，AI目前沒有偵測到瑕疵"))
-        elif {0} <= set(pred_list):
-            line_bot_api.reply_message(event.reply_token,TextSendMessage(text=result_text))
-        elif 0 not in pred_list:
-            line_bot_api.reply_message(event.reply_token,TextSendMessage(text="沒有偵測到馬鈴薯，請重新拍照"))
-
+        # yolo_predict_text_save(filename, image, event, message_content)
+        yolo_predict_photo_save(filename, image, event, message_content)
+        
     except:
         line_bot_api.reply_message(event.reply_token,TextSendMessage(text='發生錯誤！'))
     
+
     
    
 
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)
