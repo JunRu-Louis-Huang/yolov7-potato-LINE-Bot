@@ -1,0 +1,945 @@
+{
+    "type": "carousel",
+    "contents": [
+        
+        {
+          "type": "bubble",
+          "header": {
+            "type": "box",
+            "layout": "vertical",
+            "contents": [
+              {
+                "type": "text",
+                "text": "馬鈴薯瑕疵介紹"
+              }
+            ]
+          },
+          "hero": {
+            "type": "image",
+            "url": "https://storage.googleapis.com/louisai/LineBot/%E7%99%BC%E8%8A%BD.jpg",
+            "size": "full",
+            "aspectRatio": "20:13",
+            "aspectMode": "cover",
+            "action": {
+              "type": "uri",
+              "uri": "http://linecorp.com/"
+            }
+          },
+          "body": {
+            "type": "box",
+            "layout": "vertical",
+            "contents": [
+              {
+                "type": "text",
+                "text": "發芽",
+                "weight": "bold",
+                "size": "xl"
+              },
+              {
+                "type": "box",
+                "layout": "vertical",
+                "margin": "md",
+                "contents": [
+                  {
+                    "type": "text",
+                    "text": "注意，應整顆丟棄不可食用！",
+                    "size": "sm",
+                    "color": "#F14C0DFF",
+                    "margin": "md",
+                    "flex": 0
+                  }
+                ]
+              },
+              {
+                "type": "box",
+                "layout": "vertical",
+                "margin": "lg",
+                "spacing": "sm",
+                "contents": [
+                  {
+                    "type": "text",
+                    "text": "發芽的馬鈴薯、馬鈴薯皮、被淘汰的馬鈴薯其生物鹼含量較高，誤食可能導致中毒。所以對於發芽的馬鈴薯、馬鈴薯皮不建議食用。",
+                    "wrap": true,
+                    "size": "sm"
+                  },
+                  {
+                    "type": "text",
+                    "text": "茄科植物（如馬鈴薯）一般會含有一些有毒的生物鹼，馬鈴薯所含的生物鹼主要成份為solanine和chaconine。 食入多量solanine (茄鹼)可能會產生急性中毒，常見的症狀包括頭痛、噁心、嘔吐、腹痛、腹瀉等。發生中毒的時間多在食用後2至24小時，腹瀉的情形可能會持續3至6天。",
+                    "wrap": true,
+                    "size": "sm"
+                  },
+                  {
+                    "type": "text",
+                    "text": "馬鈴薯植株生物鹼以「芽」的含量最高，過度光照或儲存不當而具苦味的的塊莖生物鹼亦會升高，因此有關動物及人類食用發芽的馬鈴薯、因保存不當發霉之被淘汰馬鈴薯而導致中毒的報告則較多。",
+                    "size": "sm",
+                    "wrap": true
+                  }
+                ]
+              }
+            ]
+          },
+          "footer": {
+            "type": "box",
+            "layout": "vertical",
+            "spacing": "sm",
+            "contents": [
+              {
+                "type": "box",
+                "layout": "horizontal",
+                "contents": [
+                  {
+                    "type": "filler"
+                  },
+                  {
+                    "type": "button",
+                    "action": {
+                      "type": "postback",
+                      "label": "發綠 》",
+                      "data": "Green",
+                      "displayText": "瑕疵介紹-發綠"
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "separator"
+              },
+              {
+                "type": "box",
+                "layout": "vertical",
+                "contents": [
+                  {
+                    "type": "button",
+                    "action": {
+                      "type": "postback",
+                      "label": "返回 瑕疵導覽",
+                      "data": "defect_introduction",
+                      "displayText": "返回瑕疵導覽"
+                    }
+                  },
+                  {
+                    "type": "button",
+                    "action": {
+                      "type": "postback",
+                      "label": "切換到 馬鈴薯品種介紹",
+                      "data": "variety_introduction",
+                      "displayText": "品種介紹"
+                    }
+                  }
+                ]
+              }
+            ],
+            "flex": 0
+          }
+        },
+        {
+          "type": "bubble",
+          "header": {
+            "type": "box",
+            "layout": "vertical",
+            "contents": [
+              {
+                "type": "text",
+                "text": "馬鈴薯瑕疵介紹"
+              }
+            ]
+          },
+          "hero": {
+            "type": "image",
+            "url": "https://storage.googleapis.com/louisai/LineBot/%E7%99%BC%E7%B6%A0.jpg",
+            "size": "full",
+            "aspectRatio": "20:13",
+            "aspectMode": "cover",
+            "action": {
+              "type": "uri",
+              "uri": "http://linecorp.com/"
+            }
+          },
+          "body": {
+            "type": "box",
+            "layout": "vertical",
+            "contents": [
+              {
+                "type": "text",
+                "text": "發綠",
+                "weight": "bold",
+                "size": "xl"
+              },
+              {
+                "type": "box",
+                "layout": "vertical",
+                "margin": "md",
+                "contents": [
+                  {
+                    "type": "text",
+                    "text": "注意，發綠處不可食用！",
+                    "size": "md",
+                    "color": "#F14C0DFF",
+                    "margin": "md",
+                    "flex": 0
+                  }
+                ]
+              },
+              {
+                "type": "box",
+                "layout": "vertical",
+                "margin": "lg",
+                "spacing": "sm",
+                "contents": [
+                  {
+                    "type": "text",
+                    "text": "馬鈴薯塊莖變綠，主因為栽培、貯藏或運送過程中照射到光線造成，此外，因溫度變化劇烈或儲藏時間較久，均會破壞塊莖休眠(dormancy)，會促成馬鈴薯發芽。",
+                    "wrap": true,
+                    "size": "sm"
+                  },
+                  {
+                    "type": "text",
+                    "text": "塊莖綠化的表皮會因日光中的紅光與藍光促使龍葵鹼之α-solanine與α-chaconine（Solanine, 又稱為龍葵鹼或茄靈鹼）的合成與累積，發芽也會有龍葵鹼的累積，尤其以芽體與表皮綠色部位含量會較高，不慎食用時，入口有苦味。",
+                    "wrap": true,
+                    "size": "sm"
+                  },
+                  {
+                    "type": "text",
+                    "text": "一般龍葵鹼中毒的症狀以心、肺、肝功能障礙及神經失調為主，輕者似感冒症狀，重者有神經麻痺、呼吸困難的症狀，主要的中毒機制是茄靈會干擾乙醯膽鹼的神經傳導功能。",
+                    "size": "sm",
+                    "wrap": true
+                  },
+                  {
+                    "type": "text",
+                    "text": "人體食用鮮重超過200mg/kg的龍葵鹼可能中毒，建議切除綠色部分再行烹調。",
+                    "wrap": true,
+                    "size": "sm"
+                  }
+                ]
+              }
+            ]
+          },
+          "footer": {
+            "type": "box",
+            "layout": "vertical",
+            "spacing": "sm",
+            "contents": [
+              {
+                "type": "box",
+                "layout": "horizontal",
+                "contents": [
+                  {
+                    "type": "button",
+                    "action": {
+                      "type": "postback",
+                      "label": "《 發芽",
+                      "data": "Sprout",
+                      "displayText": "瑕疵介紹-發芽"
+                    }
+                  },
+                  {
+                    "type": "button",
+                    "action": {
+                      "type": "postback",
+                      "label": "瘡痂病 》",
+                      "data": "Scab",
+                      "displayText": "瑕疵介紹-瘡痂病"
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "separator"
+              },
+              {
+                "type": "box",
+                "layout": "vertical",
+                "contents": [
+                  {
+                    "type": "button",
+                    "action": {
+                      "type": "postback",
+                      "label": "返回 瑕疵導覽",
+                      "data": "defect_introduction",
+                      "displayText": "返回瑕疵導覽"
+                    }
+                  },
+                  {
+                    "type": "button",
+                    "action": {
+                      "type": "postback",
+                      "label": "切換到 馬鈴薯品種介紹",
+                      "data": "variety_introduction",
+                      "displayText": "品種介紹"
+                    }
+                  }
+                ]
+              }
+            ],
+            "flex": 0
+          }
+        },
+        {
+          "type": "bubble",
+          "header": {
+            "type": "box",
+            "layout": "vertical",
+            "contents": [
+              {
+                "type": "text",
+                "text": "馬鈴薯瑕疵介紹"
+              }
+            ]
+          },
+          "hero": {
+            "type": "image",
+            "url": "https://storage.googleapis.com/louisai/LineBot/%E7%98%A1%E7%97%821.jfif",
+            "size": "full",
+            "aspectRatio": "20:13",
+            "aspectMode": "cover",
+            "action": {
+              "type": "uri",
+              "uri": "http://linecorp.com/"
+            }
+          },
+          "body": {
+            "type": "box",
+            "layout": "vertical",
+            "contents": [
+              {
+                "type": "text",
+                "text": "瘡痂病",
+                "weight": "bold",
+                "size": "xl"
+              },
+              {
+                "type": "box",
+                "layout": "vertical",
+                "margin": "md",
+                "contents": [
+                  {
+                    "type": "text",
+                    "text": "僅在皮層，不耐貯藏。去皮後可食用",
+                    "size": "md",
+                    "color": "#F14C0DFF",
+                    "margin": "md",
+                    "flex": 0
+                  }
+                ]
+              },
+              {
+                "type": "box",
+                "layout": "vertical",
+                "margin": "lg",
+                "spacing": "sm",
+                "contents": [
+                  {
+                    "type": "text",
+                    "text": "馬鈴薯瘡痂病是由多種菌原菌引起的病害。",
+                    "wrap": true,
+                    "size": "sm"
+                  },
+                  {
+                    "type": "text",
+                    "text": "初期薯塊表皮產生褐色斑點，逐漸擴大成褐色近圓形或不初期薯塊表皮產生褐色斑點，逐漸擴大成褐色近圓形或不規則大斑，病斑多分散、呈網紋狀和裂口狀，表皮粗糙木質化，病斑開裂後邊緣隆起，中央凹陷，呈鏽色、暗褐色或黑色瘡痂狀硬斑塊。",
+                    "wrap": true,
+                    "size": "sm"
+                  },
+                  {
+                    "type": "text",
+                    "text": "病斑雖然僅限於皮層，但病薯不耐貯藏，外觀難看。感病後對馬鈴薯的品質影響很大，造成商品價值下降。",
+                    "size": "sm",
+                    "wrap": true
+                  }
+                ]
+              }
+            ]
+          },
+          "footer": {
+            "type": "box",
+            "layout": "vertical",
+            "spacing": "sm",
+            "contents": [
+              {
+                "type": "box",
+                "layout": "horizontal",
+                "contents": [
+                  {
+                    "type": "button",
+                    "action": {
+                      "type": "postback",
+                      "label": "《 發綠",
+                      "data": "Green",
+                      "displayText": "瑕疵介紹-發綠"
+                    }
+                  },
+                  {
+                    "type": "button",
+                    "action": {
+                      "type": "postback",
+                      "label": "發黑 》",
+                      "data": "Black",
+                      "displayText": "瑕疵介紹-發黑"
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "separator"
+              },
+              {
+                "type": "box",
+                "layout": "vertical",
+                "contents": [
+                  {
+                    "type": "button",
+                    "action": {
+                      "type": "postback",
+                      "label": "返回 瑕疵導覽",
+                      "data": "defect_introduction",
+                      "displayText": "返回瑕疵導覽"
+                    }
+                  },
+                  {
+                    "type": "button",
+                    "action": {
+                      "type": "postback",
+                      "label": "切換到 馬鈴薯品種介紹",
+                      "data": "variety_introduction",
+                      "displayText": "品種介紹"
+                    }
+                  }
+                ]
+              }
+            ],
+            "flex": 0
+          }
+        },
+        {
+          "type": "bubble",
+          "header": {
+            "type": "box",
+            "layout": "vertical",
+            "contents": [
+              {
+                "type": "text",
+                "text": "馬鈴薯瑕疵介紹"
+              }
+            ]
+          },
+          "hero": {
+            "type": "image",
+            "url": "https://storage.googleapis.com/louisai/LineBot/%E7%99%BC%E9%BB%91.jpg",
+            "size": "full",
+            "aspectRatio": "20:13",
+            "aspectMode": "cover",
+            "action": {
+              "type": "uri",
+              "uri": "http://linecorp.com/"
+            }
+          },
+          "body": {
+            "type": "box",
+            "layout": "vertical",
+            "contents": [
+              {
+                "type": "text",
+                "text": "發黑（馬鈴薯褐變）",
+                "weight": "bold",
+                "size": "xl"
+              },
+              {
+                "type": "box",
+                "layout": "vertical",
+                "margin": "md",
+                "contents": [
+                  {
+                    "type": "text",
+                    "text": "可食用（若無其他瑕疵，仍請謹慎食用）",
+                    "size": "md",
+                    "color": "#F14C0DFF",
+                    "margin": "md",
+                    "flex": 0,
+                    "wrap": true
+                  }
+                ]
+              },
+              {
+                "type": "box",
+                "layout": "vertical",
+                "margin": "lg",
+                "spacing": "sm",
+                "contents": [
+                  {
+                    "type": "text",
+                    "text": "馬鈴薯含有酵素和多酚類基質，而多酚類基質受到酵素作用而氧化後，便會使顏色產生變化。",
+                    "wrap": true,
+                    "size": "sm"
+                  },
+                  {
+                    "type": "text",
+                    "text": "外皮有受損或將馬鈴薯切開、接觸到空氣暴露一段時間後會顏色會變深，",
+                    "wrap": true,
+                    "size": "sm"
+                  },
+                  {
+                    "type": "text",
+                    "text": "去皮及切開的馬鈴薯浸在糖水或鹽水中，或是在塗抗壞血酸液，還可用真空滲入法把糖水或鹽水滲入果蔬組織內部，驅去空氣等方式以減少發黑狀況。",
+                    "size": "sm",
+                    "wrap": true
+                  }
+                ]
+              }
+            ]
+          },
+          "footer": {
+            "type": "box",
+            "layout": "vertical",
+            "spacing": "sm",
+            "contents": [
+              {
+                "type": "box",
+                "layout": "horizontal",
+                "contents": [
+                  {
+                    "type": "button",
+                    "action": {
+                      "type": "postback",
+                      "label": "《 瘡痂病",
+                      "data": "Scab",
+                      "displayText": "瑕疵介紹-瘡痂病"
+                    }
+                  },
+                  {
+                    "type": "button",
+                    "action": {
+                      "type": "postback",
+                      "label": "洞 》",
+                      "data": "Hole",
+                      "displayText": "瑕疵介紹-洞"
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "separator"
+              },
+              {
+                "type": "box",
+                "layout": "vertical",
+                "contents": [
+                  {
+                    "type": "button",
+                    "action": {
+                      "type": "postback",
+                      "label": "返回 瑕疵導覽",
+                      "data": "defect_introduction",
+                      "displayText": "返回瑕疵導覽"
+                    }
+                  },
+                  {
+                    "type": "button",
+                    "action": {
+                      "type": "postback",
+                      "label": "切換到 馬鈴薯品種介紹",
+                      "data": "variety_introduction",
+                      "displayText": "品種介紹"
+                    }
+                  }
+                ]
+              }
+            ],
+            "flex": 0
+          }
+        },
+        {
+          "type": "bubble",
+          "header": {
+            "type": "box",
+            "layout": "vertical",
+            "contents": [
+              {
+                "type": "text",
+                "text": "馬鈴薯瑕疵介紹"
+              }
+            ]
+          },
+          "hero": {
+            "type": "image",
+            "url": "https://storage.googleapis.com/louisai/LineBot/%E6%B4%9E.jpg",
+            "size": "full",
+            "aspectRatio": "20:13",
+            "aspectMode": "cover",
+            "action": {
+              "type": "uri",
+              "uri": "http://linecorp.com/"
+            }
+          },
+          "body": {
+            "type": "box",
+            "layout": "vertical",
+            "contents": [
+              {
+                "type": "text",
+                "text": "洞",
+                "weight": "bold",
+                "size": "xl"
+              },
+              {
+                "type": "box",
+                "layout": "vertical",
+                "margin": "md",
+                "contents": [
+                  {
+                    "type": "text",
+                    "text": "若有腐爛則不可食用",
+                    "size": "md",
+                    "color": "#F14C0DFF",
+                    "margin": "md",
+                    "flex": 0,
+                    "wrap": true
+                  }
+                ]
+              },
+              {
+                "type": "box",
+                "layout": "vertical",
+                "margin": "lg",
+                "spacing": "sm",
+                "contents": [
+                  {
+                    "type": "text",
+                    "text": "若外皮呈較透明的黑坑，是因為冷凍所致！在儲藏過時經低溫冷藏，適合馬鈴薯貯存溫度1~3℃為佳，但若低於0°C以下就會凍傷。而凍傷後的馬鈴薯，外皮部分看似透明，內部卻會發黑腐爛。",
+                    "wrap": true,
+                    "size": "sm"
+                  },
+                  {
+                    "type": "text",
+                    "text": "另外有些洞為蟲蛀，易造成俗稱的爛坑。圖中的洞為蟲蛀所致。",
+                    "wrap": true,
+                    "size": "sm"
+                  }
+                ]
+              }
+            ]
+          },
+          "footer": {
+            "type": "box",
+            "layout": "vertical",
+            "spacing": "sm",
+            "contents": [
+              {
+                "type": "box",
+                "layout": "horizontal",
+                "contents": [
+                  {
+                    "type": "button",
+                    "action": {
+                      "type": "postback",
+                      "label": "《 發黑",
+                      "data": "Black",
+                      "displayText": "瑕疵介紹-發黑"
+                    }
+                  },
+                  {
+                    "type": "button",
+                    "action": {
+                      "type": "postback",
+                      "label": "畸形 》",
+                      "data": "Deformation",
+                      "displayText": "瑕疵介紹-畸形"
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "separator"
+              },
+              {
+                "type": "box",
+                "layout": "vertical",
+                "contents": [
+                  {
+                    "type": "button",
+                    "action": {
+                      "type": "postback",
+                      "label": "返回 瑕疵導覽",
+                      "data": "defect_introduction",
+                      "displayText": "返回瑕疵導覽"
+                    }
+                  },
+                  {
+                    "type": "button",
+                    "action": {
+                      "type": "postback",
+                      "label": "切換到 馬鈴薯品種介紹",
+                      "data": "variety_introduction",
+                      "displayText": "品種介紹"
+                    }
+                  }
+                ]
+              }
+            ],
+            "flex": 0
+          }
+        },
+        {
+          "type": "bubble",
+          "header": {
+            "type": "box",
+            "layout": "vertical",
+            "contents": [
+              {
+                "type": "text",
+                "text": "馬鈴薯瑕疵介紹"
+              }
+            ]
+          },
+          "hero": {
+            "type": "image",
+            "url": "https://storage.googleapis.com/louisai/LineBot/%E7%95%B8%E5%BD%A2.jpg",
+            "size": "full",
+            "aspectRatio": "20:13",
+            "aspectMode": "cover",
+            "action": {
+              "type": "uri",
+              "uri": "http://linecorp.com/"
+            }
+          },
+          "body": {
+            "type": "box",
+            "layout": "vertical",
+            "contents": [
+              {
+                "type": "text",
+                "text": "畸形",
+                "weight": "bold",
+                "size": "xl"
+              },
+              {
+                "type": "box",
+                "layout": "vertical",
+                "margin": "md",
+                "contents": [
+                  {
+                    "type": "text",
+                    "text": "可食用",
+                    "size": "md",
+                    "color": "#30CC0EFF",
+                    "margin": "md",
+                    "flex": 0,
+                    "wrap": true
+                  }
+                ]
+              },
+              {
+                "type": "box",
+                "layout": "vertical",
+                "margin": "lg",
+                "spacing": "sm",
+                "contents": [
+                  {
+                    "type": "text",
+                    "text": "為二次生長所致。春作馬鈴薯較易成畸形薯，經濟價值亦較低。",
+                    "wrap": true,
+                    "size": "sm"
+                  },
+                  {
+                    "type": "text",
+                    "text": "由於高溫乾旱等不良條件，使正在膨大的塊莖停止生長，周皮木栓化。此時如再遇雨或灌溉，給予了馬鈴薯適宜的生長條件，但由於塊莖表皮已經木栓化，不能繼續生長，只能從生理活性強的芽眼處二次生長，從而形成了各種畸形薯",
+                    "wrap": true,
+                    "size": "sm"
+                  }
+                ]
+              }
+            ]
+          },
+          "footer": {
+            "type": "box",
+            "layout": "vertical",
+            "spacing": "sm",
+            "contents": [
+              {
+                "type": "box",
+                "layout": "horizontal",
+                "contents": [
+                  {
+                    "type": "button",
+                    "action": {
+                      "type": "postback",
+                      "label": "《 洞",
+                      "data": "Hole",
+                      "displayText": "瑕疵介紹-洞"
+                    }
+                  },
+                  {
+                    "type": "button",
+                    "action": {
+                      "type": "postback",
+                      "label": "白絹病 》",
+                      "data": "Mold",
+                      "displayText": "瑕疵介紹-馬鈴薯白絹病"
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "separator"
+              },
+              {
+                "type": "box",
+                "layout": "vertical",
+                "contents": [
+                  {
+                    "type": "button",
+                    "action": {
+                      "type": "postback",
+                      "label": "返回 瑕疵導覽",
+                      "data": "defect_introduction",
+                      "displayText": "返回瑕疵導覽"
+                    }
+                  },
+                  {
+                    "type": "button",
+                    "action": {
+                      "type": "postback",
+                      "label": "切換到 馬鈴薯品種介紹",
+                      "data": "variety_introduction",
+                      "displayText": "品種介紹"
+                    }
+                  }
+                ]
+              }
+            ],
+            "flex": 0
+          }
+        },
+        {
+          "type": "bubble",
+          "header": {
+            "type": "box",
+            "layout": "vertical",
+            "contents": [
+              {
+                "type": "text",
+                "text": "馬鈴薯瑕疵介紹"
+              }
+            ]
+          },
+          "hero": {
+            "type": "image",
+            "url": "https://storage.googleapis.com/louisai/LineBot/%E7%99%BD%E7%B5%B9%E7%97%852.jpg",
+            "size": "full",
+            "aspectRatio": "20:17",
+            "aspectMode": "cover",
+            "action": {
+              "type": "uri",
+              "uri": "http://linecorp.com/"
+            }
+          },
+          "body": {
+            "type": "box",
+            "layout": "vertical",
+            "contents": [
+              {
+                "type": "text",
+                "text": "馬鈴薯白絹病",
+                "weight": "bold",
+                "size": "xl"
+              },
+              {
+                "type": "box",
+                "layout": "vertical",
+                "margin": "md",
+                "contents": [
+                  {
+                    "type": "text",
+                    "text": "不可食用",
+                    "size": "md",
+                    "color": "#F14C0DFF",
+                    "margin": "md",
+                    "flex": 0,
+                    "wrap": true
+                  }
+                ]
+              },
+              {
+                "type": "box",
+                "layout": "vertical",
+                "margin": "lg",
+                "spacing": "sm",
+                "contents": [
+                  {
+                    "type": "text",
+                    "text": "馬鈴薯在生長過程中感染了植物病原真菌，造成馬鈴薯白絹病，上面的白毛，其實是發病嚴重時期的病原菌的菌絲。",
+                    "wrap": true,
+                    "size": "sm"
+                  },
+                  {
+                    "type": "text",
+                    "text": "初期在發病部位出現很多白色絲狀細毛，隨著病害加重，病斑繼續擴展，塊莖表面可以看到很明顯的白毛， 且靠近白毛位置果皮呈灰褐色，略微發軟。",
+                    "wrap": true,
+                    "size": "sm"
+                  },
+                  {
+                    "type": "text",
+                    "text": "後期在白毛下面可看到許多黃褐色或者棕褐色的圓顆粒狀的小菌核，發病部位下部果肉開始腐爛發黑，嚴重的馬鈴薯整個腐爛。",
+                    "size": "sm",
+                    "wrap": true
+                  }
+                ]
+              }
+            ]
+          },
+          "footer": {
+            "type": "box",
+            "layout": "vertical",
+            "spacing": "sm",
+            "contents": [
+              {
+                "type": "box",
+                "layout": "horizontal",
+                "contents": [
+                  {
+                    "type": "button",
+                    "action": {
+                      "type": "postback",
+                      "label": "《 畸形",
+                      "data": "Deformation",
+                      "displayText": "瑕疵介紹-畸形"
+                    }
+                  },
+                  {
+                    "type": "filler"
+                  }
+                ]
+              },
+              {
+                "type": "separator"
+              },
+              {
+                "type": "box",
+                "layout": "vertical",
+                "contents": [
+                  {
+                    "type": "button",
+                    "action": {
+                      "type": "postback",
+                      "label": "返回 瑕疵導覽",
+                      "data": "defect_introduction",
+                      "displayText": "返回瑕疵導覽"
+                    }
+                  },
+                  {
+                    "type": "button",
+                    "action": {
+                      "type": "postback",
+                      "label": "切換到 馬鈴薯品種介紹",
+                      "data": "variety_introduction",
+                      "displayText": "品種介紹"
+                    }
+                  }
+                ]
+              }
+            ],
+            "flex": 0
+          }
+        }
+      ]
+}
+      

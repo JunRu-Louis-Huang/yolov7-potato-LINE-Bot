@@ -1,6 +1,7 @@
 import os
+import io
 
-import subprocess
+# import subprocess
 
 from line_bot_api import *
 
@@ -11,13 +12,15 @@ from PIL import Image
 
 from models.experimental import attempt_load
 from utils.general import non_max_suppression
+from events.gcs import upload_blob_from_memory
 
 WEIGHTS = "best_corr_tiny_20230205.pt"
 DEVICE = "cuda"
 IMAGE_SIZE = 640
 
 CLASSES = ['potato', 'sprout', 'green', 'scab', 'black', 'hole', 'deformation', 'mold']
-CLASSES_zh = ["馬鈴薯", "發芽", "發綠", "瘡痂", "發黑", "洞", "畸形", "白絹病"]
+CLASSES_zh = ["馬鈴薯", "發芽", "發綠", "瘡痂", "發黑", "洞", "畸形", "白絹病(發霉)"]
+bucket_name = "janeai-10"
 
 # Load YOLOv7
 model = attempt_load(WEIGHTS, map_location=DEVICE)
@@ -49,11 +52,39 @@ def download_RealTime(event):
             event.reply_token,
             flex_message)
 
+# 馬鈴薯小學堂
+def introduction(event):
+    template_message = TemplateSendMessage(
+        alt_text='馬鈴薯小學堂',
+        template=ButtonsTemplate(
+                thumbnail_image_url='https://static.vecteezy.com/system/resources/thumbnails/002/044/760/small_2x/fresh-organic-potatoes-in-a-bowl-free-photo.jpg',
+                title='馬鈴薯小學堂',
+                text='了解更多馬鈴薯瑕疵介紹、品種介紹資訊......',
+                actions=[
+                    PostbackTemplateAction(  #執行Postback功能,觸發Postback事件
+                        label='瑕疵',  #按鈕文字
+                        text='瑕疵導覽',  #顯示文字訊息
+                        data='defect_introduction'  #Postback資料
+                    ),
+                    PostbackTemplateAction(  #執行Postback功能,觸發Postback事件
+                        label='品種介紹',  #按鈕文字
+                        text='品種介紹',  #顯示文字訊息
+                        data='variety_introduction'  #Postback資料
+                    )
+                ]
+            )
+    
+    )
+    line_bot_api.reply_message(
+            event.reply_token,
+            template_message)
+
 
 # image message type 
-def save_img(event, filename):
-    # global filename 
+def save_img(event):
+    # global filename
     message_content = line_bot_api.get_message_content(event.message.id)
+    filename = f"./Images/{event.message.id}.{message_content.content_type.split('/')[1].lower()}"
     print(f"Message type: {event.message.type}\tMessage id: {event.message.id}")
 
     if not os.path.exists("./Images"):
@@ -74,7 +105,10 @@ def save_img(event, filename):
 
 
 # Predict by YOLO
-def yolo_predict_text_save(filename, image, event, message_content, image_size=640):
+def yolo_predict_text_save(event, image_size=640):
+    message_content = line_bot_api.get_message_content(event.message.id)
+    filename = f"./Images/{event.message.id}.{message_content.content_type.split('/')[1].lower()}"
+    image = Image.open(filename)
     image = np.asarray(image)
     
     # Resize image to the inference size
@@ -148,8 +182,8 @@ def yolo_predict_text_save(filename, image, event, message_content, image_size=6
     elif 0 not in pred_list:
         line_bot_api.reply_message(event.reply_token,TextSendMessage(text="沒有偵測到馬鈴薯，請重新拍照"))
 
-
-def yolo_predict_photo_save(filename, image, event, message_content, image_size=640):
+## 照片存本地、回傳yolo方框照片
+def yolo_predict_photo_save(event, image_size=640):
     try:
         user_profile = get_profile(event)
         group_summary = get_group_summary(event)
@@ -158,6 +192,9 @@ def yolo_predict_photo_save(filename, image, event, message_content, image_size=
         user_profile = get_profile(event)
     finally:
         pass
+    message_content = line_bot_api.get_message_content(event.message.id)
+    filename = f"./Images/{event.message.id}.{message_content.content_type.split('/')[1].lower()}"
+    image = Image.open(filename)
     image = np.asarray(image)
     
     # Resize image to the inference size
@@ -178,8 +215,6 @@ def yolo_predict_photo_save(filename, image, event, message_content, image_size=
     # Resize boxes to the original image size
     pred[:, [0, 2]] *= ori_w / image_size
     pred[:, [1, 3]] *= ori_h / image_size
-    
-    # return pred
 
     ## Visualize the result 
     image = cv2.imread(filename)  # queryImage
@@ -262,6 +297,124 @@ def yolo_predict_photo_save(filename, image, event, message_content, image_size=
             ]
     line_bot_api.reply_message(event.reply_token, message)
 
+## YOLOv7(接收照片存入Google Cloud Storage)
+def yolo_predict_photoText(event, image_size=640):
+    message_id = event.message.id
+    message_content = line_bot_api.get_message_content(message_id)
+    b = b''
+    for chunk in message_content.iter_content():
+        b += chunk
+    # Save to GCS
+    filename = f"images/User_Upload_Images/{event.message.id}.{message_content.content_type.split('/')[1].lower()}"
+    upload_blob_from_memory(bucket_name, b, filename)
+
+    image = Image.open(io.BytesIO(b))
+    image = np.asarray(image)
+    
+    # Resize image to the inference size
+    ori_h, ori_w = image.shape[:2]
+    image = cv2.resize(image, (image_size, image_size))
+    
+    # Transform image from numpy to torch format
+    image_pt = torch.from_numpy(image).permute(2, 0, 1).to(DEVICE)
+    image_pt = image_pt.float() / 255.0
+    
+    # Infer
+    with torch.no_grad():
+        pred = model(image_pt[None], augment=False)[0]
+    
+    # NMS
+    pred = non_max_suppression(pred)[0].cpu().numpy()
+    
+    # Resize boxes to the original image size
+    pred[:, [0, 2]] *= ori_w / image_size
+    pred[:, [1, 3]] *= ori_h / image_size
+    
+    # return pred
+
+    ## Visualize the result 直接從記憶體取得照片
+    npimg = np.fromstring(b, np.uint8)
+    image = cv2.imdecode(npimg, cv2.IMREAD_COLOR)  # queryImage
+    result_text = "影像偵測到可能有：\n"
+    i = 1
+    pred_list = []  
+    # potato_range_list = []
+    # print(pred)
+    
+    for x1, y1, x2, y2, conf, class_id in pred:
+        # if conf >= 0.4:
+        text = f"{CLASSES[int(class_id)]}  {conf:.2f}"
+        # print(x1, y1, x2,  y2, conf, class_id) 
+        x1, y1, x2, y2 = int(x1), int(y1), int(x2), int(y2)
+        # print(x1, y1, x2, y2)
+        cv2.rectangle(image, (x1, y1), (x2, y2), (0, 255, 0), 4)
+        cv2.putText(image, text, (x1, y1), 2, 1, (30,250,255), 2)
+        # print(f"{CLASSES[int(class_id)]}  {conf:.2f}")
+        if int(class_id) == 0:
+            # coordinate = (x1, y1, x2, y2)
+            # potato_range_list.append(coordinate)
+            pred_list.append(int(class_id))
+
+        else:
+            # for j in potato_range_list:
+            #     if ((j[0] <= x1 <= j[2]) and (j[1] <= y1 <= j[3])) or ((j[0] <= x2 <= j[2]) and (j[1] <= y2 <= j[3])) or ((j[0] <= x1 <= j[2]) and (j[1] <= y2 <= j[3])) or ((j[0] <= x2 <= j[2]) and (j[1] <= y1 <= j[3])):
+                    pred_list.append(int(class_id))
+                    result_text += f"{i}. {CLASSES_zh[int(class_id)]}  (Conf: {conf:.2f})\n"
+                    i += 1           
+    if not os.path.exists("./static"):
+        os.mkdir("./static")
+    pred_img_file = f"./static/{event.message.id}.{message_content.content_type.split('/')[1].lower()}"
+    cv2.imwrite(pred_img_file, image)
+    print("YOLO Image was saved")
+
+    img_encode = cv2.imencode('.jpeg', image)[1]
+
+    # Converting the image into numpy array
+    data_encode = np.array(img_encode)
+    # Converting the array to bytes.
+    byte_encode = data_encode.tobytes()
+    pred_imgName_to_GCS = f"images/yolo_predImg/{event.message.id}.{message_content.content_type.split('/')[1].lower()}"
+    upload_blob_from_memory(bucket_name, byte_encode, pred_imgName_to_GCS)
+
+    if {0} == set(pred_list):
+        text="辨識完成，AI目前沒有偵測到瑕疵"
+    elif {0} <= set(pred_list):
+        text=result_text
+    elif 0 not in pred_list:
+        text="沒有偵測到馬鈴薯，請重新拍照"
+
+    send_img = ImageSendMessage(  #傳送圖片
+                        # original_content_url = f"{end_point}{pred_img_file[1:]}",
+                        # preview_image_url = f"{end_point}{pred_img_file[1:]}"
+                         original_content_url = f"https://storage.googleapis.com/{bucket_name}/images/yolo_predImg/{event.message.id}.{message_content.content_type.split('/')[1].lower()}",
+                         preview_image_url = f"https://storage.googleapis.com/{bucket_name}/images/yolo_predImg/{event.message.id}.{message_content.content_type.split('/')[1].lower()}"
+                    )
+    send_pred_text = TextSendMessage(text=text)
+    message = [
+            send_img,
+            send_pred_text,
+            ]
+    line_bot_api.reply_message(event.reply_token, message)
+
+## Who am I
+def whoami(event):
+    user_id = event.source.user_id
+    profile = line_bot_api.get_profile(user_id)    
+    f = open("./events/whoami.json", "r", encoding="utf-8")
+    contents_json = json.load(f)
+    contents_json["hero"]["url"]=profile.picture_url
+    contents_json["body"]["contents"][0]["contents"][0]["contents"][1]["text"] = profile.display_name
+    contents_json["body"]["contents"][0]["contents"][1]["contents"][1]["text"] = profile.user_id
+    contents_json["body"]["contents"][0]["contents"][2]["contents"][1]["text"] = profile.status_message if profile.status_message else "-"
+    contents_json["body"]["contents"][0]["contents"][3]["contents"][1]["text"] = profile.language
+
+    flex_message = FlexSendMessage(alt_text='下載APP', contents=contents_json)
+    f.close()
+    
+    line_bot_api.reply_message(
+            event.reply_token,
+            flex_message)
+
 
 ## Get user profile information.
 def get_profile(event):
@@ -316,3 +469,4 @@ def get_group_members_count(event):
     group_count = line_bot_api.get_group_members_count(group_id)
     print(group_count)
     return group_count
+

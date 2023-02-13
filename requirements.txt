@@ -41,3 +41,8 @@ thop  # FLOPs computation
 # LineBot -------------------------------------
 line-bot-sdk
 Flask
+flask-sqlalchemy
+sqlalchemy<2.0.0
+
+# Google Cloud Storage ------------------------
+google-cloud-storage

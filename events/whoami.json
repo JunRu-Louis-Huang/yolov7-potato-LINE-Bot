@@ -1,0 +1,111 @@
+{
+  "type": "bubble",
+  "header": {
+    "type": "box",
+    "layout": "vertical",
+    "contents": [
+      {
+        "type": "text",
+        "text": "我是誰",
+        "size": "xl"
+      }
+    ]
+  },
+  "hero": {
+    "type": "image",
+    "url": "https://scdn.line-apps.com/n/channel_devcenter/img/fx/01_1_cafe.png",
+    "size": "4xl",
+    "aspectRatio": "1:1",
+    "aspectMode": "cover",
+    "action": {
+      "type": "uri",
+      "uri": "http://linecorp.com/"
+    }
+  },
+  "body": {
+    "type": "box",
+    "layout": "vertical",
+    "contents": [
+      {
+        "type": "box",
+        "layout": "vertical",
+        "margin": "lg",
+        "spacing": "sm",
+        "contents": [
+          {
+            "type": "box",
+            "layout": "baseline",
+            "contents": [
+              {
+                "type": "text",
+                "text": "暱稱",
+                "flex": 2,
+                "color": "#88AA88"
+              },
+              {
+                "type": "text",
+                "wrap": true,
+                "flex": 5,
+                "text": "user_display_name"
+              }
+            ]
+          },
+          {
+            "type": "box",
+            "layout": "baseline",
+            "contents": [
+              {
+                "type": "text",
+                "text": "User ID",
+                "flex": 2,
+                "color": "#88AA88"
+              },
+              {
+                "type": "text",
+                "text": "user_id",
+                "wrap": true,
+                "flex": 5
+              }
+            ]
+          },
+          {
+            "type": "box",
+            "layout": "baseline",
+            "contents": [
+              {
+                "type": "text",
+                "text": "我的狀態",
+                "flex": 2,
+                "color": "#88AA88"
+              },
+              {
+                "type": "text",
+                "text": "status_message",
+                "flex": 5,
+                "wrap": true
+              }
+            ]
+          },
+          {
+            "type": "box",
+            "layout": "baseline",
+            "contents": [
+              {
+                "type": "text",
+                "text": "語言",
+                "flex": 2,
+                "color": "#88AA88"
+              },
+              {
+                "type": "text",
+                "text": "Language",
+                "flex": 5,
+                "wrap": true
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}
