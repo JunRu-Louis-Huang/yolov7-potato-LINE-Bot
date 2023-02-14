@@ -3,8 +3,9 @@ import os
 # Imports the Google Cloud client library
 from google.cloud import storage
 
-YOUR_SERVICE = 'gcpai_janyu.json'
+YOUR_SERVICE = 'gcpai_janyu.json'  # gcpai_janyu.json
 os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = YOUR_SERVICE
+bucket_name = "janeai-10" # louisai # janeai-10
 
 def upload_blob_from_memory(bucket_name, contents, destination_blob_name):
     """Uploads a file to the bucket."""

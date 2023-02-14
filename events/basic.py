@@ -2,6 +2,7 @@ import os
 import io
 
 # import subprocess
+from datetime import datetime
 
 from line_bot_api import *
 
@@ -12,15 +13,15 @@ from PIL import Image
 
 from models.experimental import attempt_load
 from utils.general import non_max_suppression
-from events.gcs import upload_blob_from_memory
+from events.gcs import *
 
-WEIGHTS = "best_corr_tiny_20230205.pt"
+WEIGHTS = WEIGHTS
 DEVICE = "cuda"
 IMAGE_SIZE = 640
 
 CLASSES = ['potato', 'sprout', 'green', 'scab', 'black', 'hole', 'deformation', 'mold']
 CLASSES_zh = ["馬鈴薯", "發芽", "發綠", "瘡痂", "發黑", "洞", "畸形", "白絹病(發霉)"]
-bucket_name = "janeai-10"
+bucket_name = bucket_name
 
 # Load YOLOv7
 model = attempt_load(WEIGHTS, map_location=DEVICE)
@@ -305,7 +306,7 @@ def yolo_predict_photoText(event, image_size=640):
     for chunk in message_content.iter_content():
         b += chunk
     # Save to GCS
-    filename = f"images/User_Upload_Images/{event.message.id}.{message_content.content_type.split('/')[1].lower()}"
+    filename = f"images/User_Upload_Images/{message_id}.{message_content.content_type.split('/')[1].lower()}"
     upload_blob_from_memory(bucket_name, b, filename)
 
     image = Image.open(io.BytesIO(b))
@@ -361,11 +362,11 @@ def yolo_predict_photoText(event, image_size=640):
                     pred_list.append(int(class_id))
                     result_text += f"{i}. {CLASSES_zh[int(class_id)]}  (Conf: {conf:.2f})\n"
                     i += 1           
-    if not os.path.exists("./static"):
-        os.mkdir("./static")
-    pred_img_file = f"./static/{event.message.id}.{message_content.content_type.split('/')[1].lower()}"
-    cv2.imwrite(pred_img_file, image)
-    print("YOLO Image was saved")
+    # if not os.path.exists("./static"):
+    #     os.mkdir("./static")
+    # pred_img_file = f"./static/{message_id}.{message_content.content_type.split('/')[1].lower()}"
+    # cv2.imwrite(pred_img_file, image)
+    # print("YOLO Image was saved")
 
     img_encode = cv2.imencode('.jpeg', image)[1]
 
@@ -373,7 +374,7 @@ def yolo_predict_photoText(event, image_size=640):
     data_encode = np.array(img_encode)
     # Converting the array to bytes.
     byte_encode = data_encode.tobytes()
-    pred_imgName_to_GCS = f"images/yolo_predImg/{event.message.id}.{message_content.content_type.split('/')[1].lower()}"
+    pred_imgName_to_GCS = f"images/yolo_predImg/{message_id}.{message_content.content_type.split('/')[1].lower()}"
     upload_blob_from_memory(bucket_name, byte_encode, pred_imgName_to_GCS)
 
     if {0} == set(pred_list):
@@ -386,8 +387,8 @@ def yolo_predict_photoText(event, image_size=640):
     send_img = ImageSendMessage(  #傳送圖片
                         # original_content_url = f"{end_point}{pred_img_file[1:]}",
                         # preview_image_url = f"{end_point}{pred_img_file[1:]}"
-                         original_content_url = f"https://storage.googleapis.com/{bucket_name}/images/yolo_predImg/{event.message.id}.{message_content.content_type.split('/')[1].lower()}",
-                         preview_image_url = f"https://storage.googleapis.com/{bucket_name}/images/yolo_predImg/{event.message.id}.{message_content.content_type.split('/')[1].lower()}"
+                         original_content_url = f"https://storage.googleapis.com/{bucket_name}/images/yolo_predImg/{message_id}.{message_content.content_type.split('/')[1].lower()}",
+                         preview_image_url = f"https://storage.googleapis.com/{bucket_name}/images/yolo_predImg/{message_id}.{message_content.content_type.split('/')[1].lower()}"
                     )
     send_pred_text = TextSendMessage(text=text)
     message = [
@@ -395,6 +396,34 @@ def yolo_predict_photoText(event, image_size=640):
             send_pred_text,
             ]
     line_bot_api.reply_message(event.reply_token, message)
+
+    # update db
+    potato = sprout = green = scab = black = hole = deformation = mold = 0
+
+    for i in pred_list:
+        if i == 0:
+            potato += 1
+        elif i == 1:
+            sprout += 1
+        elif i == 2:
+            green += 1
+        elif i == 3:
+            scab += 1
+        elif i == 4:
+            black += 1
+        elif i == 5:
+            hole += 1
+        elif i == 6:
+            deformation += 1
+        elif i == 7:
+            mold += 1
+    user_id = event.source.user_id
+    time = datetime.fromtimestamp(event.timestamp/1000)
+
+    sql_cmd = f"""insert into potato.DEFECT_MARK (`IMAGE`, `USER_ID`, `TIME`, `POTATO`, `SPROUT`, `GREEN`, `SCAB`, `BLACK`, `HOLE`, `DEFORMATION`, `MOLD`) values
+        ('{message_id}','{user_id}','{time}', '{potato}', '{sprout}', '{green}', '{scab}', '{black}', '{hole}', '{deformation}', '{mold}');"""
+    return sql_cmd
+
 
 ## Who am I
 def whoami(event):
