@@ -7,7 +7,7 @@ from linebot.models import MessageEvent, TextMessage,TextSendMessage, ImageSendM
      FlexSendMessage, PostbackEvent, TemplateSendMessage, ButtonsTemplate, PostbackTemplateAction, FollowEvent, UnfollowEvent
 
 
-with open('env_test.json', encoding="utf-8") as f:
+with open('env.json', encoding="utf-8") as f:
     env = json.load(f)
 line_bot_api = LineBotApi(env['CHANNEL_ACCESS_TOKEN'])
 handler = WebhookHandler(env['CHANNEL_SECRET'])
