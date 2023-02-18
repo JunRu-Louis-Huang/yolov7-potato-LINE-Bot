@@ -89,3 +89,167 @@ def introduct_mold(event):
     line_bot_api.reply_message(
             event.reply_token,
             flex_message)
+
+# 品種介紹-總攬
+def cultivar(event):
+    f = open("./events/cultivar_all.json", "r", encoding="utf-8")
+    contents_json = json.load(f)
+    flex_message = FlexSendMessage(alt_text='品種介紹總攬，請選擇品種', contents=contents_json)
+    f.close()
+    line_bot_api.reply_message(
+            event.reply_token,
+            flex_message)
+
+# 品種介紹-克尼伯
+def cultivar_0(event):
+    f = open("./events/cultivar.json", "r", encoding="utf-8")
+    contents_json = json.load(f)
+    flex_message = FlexSendMessage(alt_text='你來到品種介紹-克尼伯', contents=contents_json[0])
+    f.close()
+    line_bot_api.reply_message(
+            event.reply_token,
+            flex_message)
+
+# 品種介紹-台農一號
+def cultivar_1(event):
+    f = open("./events/cultivar.json", "r", encoding="utf-8")
+    contents_json = json.load(f)
+    flex_message = FlexSendMessage(alt_text='你來到品種介紹-台農一號', contents=contents_json[1])
+    f.close()
+    line_bot_api.reply_message(
+            event.reply_token,
+            flex_message)
+
+# 品種介紹-台農三號
+def cultivar_2(event):
+    f = open("./events/cultivar.json", "r", encoding="utf-8")
+    contents_json = json.load(f)
+    flex_message = FlexSendMessage(alt_text='你來到品種介紹-台農三號', contents=contents_json[2])
+    f.close()
+    line_bot_api.reply_message(
+            event.reply_token,
+            flex_message)
+
+# 品種介紹-台農四號
+def cultivar_3(event):
+    f = open("./events/cultivar.json", "r", encoding="utf-8")
+    contents_json = json.load(f)
+    flex_message = FlexSendMessage(alt_text='你來到品種介紹-台農四號', contents=contents_json[3])
+    f.close()
+    line_bot_api.reply_message(
+            event.reply_token,
+            flex_message)
+
+# 品種介紹-種苗二號
+def cultivar_4(event):
+    f = open("./events/cultivar.json", "r", encoding="utf-8")
+    contents_json = json.load(f)
+    flex_message = FlexSendMessage(alt_text='你來到品種介紹-種苗二號', contents=contents_json[4])
+    f.close()
+    line_bot_api.reply_message(
+            event.reply_token,
+            flex_message)
+
+# 品種介紹-種苗四號
+def cultivar_5(event):
+    f = open("./events/cultivar.json", "r", encoding="utf-8")
+    contents_json = json.load(f)
+    flex_message = FlexSendMessage(alt_text='你來到品種介紹-種苗四號', contents=contents_json[5])
+    f.close()
+    line_bot_api.reply_message(
+            event.reply_token,
+            flex_message)
+
+# 品種介紹-種苗六號
+def cultivar_6(event):
+    f = open("./events/cultivar.json", "r", encoding="utf-8")
+    contents_json = json.load(f)
+    flex_message = FlexSendMessage(alt_text='你來到品種介紹-種苗六號', contents=contents_json[6])
+    f.close()
+    line_bot_api.reply_message(
+            event.reply_token,
+            flex_message)
+
+# 品種介紹-大利
+def cultivar_7(event):
+    f = open("./events/cultivar.json", "r", encoding="utf-8")
+    contents_json = json.load(f)
+    flex_message = FlexSendMessage(alt_text='你來到品種介紹-大利', contents=contents_json[7])
+    f.close()
+    line_bot_api.reply_message(
+            event.reply_token,
+            flex_message)
+
+# 品種介紹-大西洋
+def cultivar_8(event):
+    f = open("./events/cultivar.json", "r", encoding="utf-8")
+    contents_json = json.load(f)
+    flex_message = FlexSendMessage(alt_text='你來到品種介紹-大西洋', contents=contents_json[8])
+    f.close()
+    line_bot_api.reply_message(
+            event.reply_token,
+            flex_message)
+
+# 品種介紹- 紅皮馬鈴薯
+def cultivar_9(event):
+    f = open("./events/cultivar.json", "r", encoding="utf-8")
+    contents_json = json.load(f)
+    flex_message = FlexSendMessage(alt_text='你來到品種介紹-紅皮馬鈴薯', contents=contents_json[9])
+    f.close()
+    line_bot_api.reply_message(
+            event.reply_token,
+            flex_message)
+
+# 品種介紹- 褐皮馬鈴薯
+def cultivar_10(event):
+    f = open("./events/cultivar.json", "r", encoding="utf-8")
+    contents_json = json.load(f)
+    flex_message = FlexSendMessage(alt_text='你來到品種介紹-褐皮馬鈴薯', contents=contents_json[10])
+    f.close()
+    line_bot_api.reply_message(
+            event.reply_token,
+            flex_message)
+
+# 品種介紹- 白玉馬鈴薯
+def cultivar_11(event):
+    f = open("./events/cultivar.json", "r", encoding="utf-8")
+    contents_json = json.load(f)
+    flex_message = FlexSendMessage(alt_text='你來到品種介紹-白玉馬鈴薯', contents=contents_json[11])
+    f.close()
+    line_bot_api.reply_message(
+            event.reply_token,
+            flex_message)
+
+# 品種介紹- 彩色馬鈴薯
+def cultivar_12(event):
+    f = open("./events/cultivar.json", "r", encoding="utf-8")
+    contents_json = json.load(f)
+    flex_message = FlexSendMessage(alt_text='你來到品種介紹-彩色馬鈴薯', contents=contents_json[12])
+    f.close()
+    line_bot_api.reply_message(
+            event.reply_token,
+            flex_message)
+
+
+# 關於
+def test(event):
+    f = open("./events/test.json", "r", encoding="utf-8")
+    contents_json = json.load(f)
+    flex_message = FlexSendMessage(alt_text='你來到關於我', contents=contents_json)
+    f.close()
+    line_bot_api.reply_message(
+            event.reply_token,
+            flex_message)
+    
+def manual(event):
+    text = "祝您使用愉快。 🙂\n使用後別忘了填寫問卷唷！❤"
+    send_img = ImageSendMessage(  #傳送圖片
+                        original_content_url = "https://storage.googleapis.com/louisai/LineBot/%E6%AD%A5%E9%A9%9F%E6%95%99%E5%AD%B8.jpg",
+                        preview_image_url = "https://storage.googleapis.com/louisai/LineBot/%E6%AD%A5%E9%A9%9F%E6%95%99%E5%AD%B8.jpg"
+                    )
+    send_pred_text = TextSendMessage(text=text)
+    message = [
+            send_img,
+            send_pred_text,
+            ]
+    line_bot_api.reply_message(event.reply_token, message)

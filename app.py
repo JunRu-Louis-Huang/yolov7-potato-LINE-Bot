@@ -3,13 +3,13 @@ import os
 from datetime import datetime
 
 from flask import Flask
-from flask import request, abort
+from flask import request, abort, render_template
 from flask_sqlalchemy import SQLAlchemy
 db = SQLAlchemy()
 from line_bot_api import *
-from events.basic import detect_event, download_RealTime, save_img, yolo_predict_text_save, yolo_predict_photo_save,\
+from events.basic import detect_event, save_img, yolo_predict_text_save, yolo_predict_photo_save,\
      yolo_predict_photoText, get_group_summary, get_profile, get_group_member_profile, get_group_members_count,\
-     introduction, whoami
+     introduction, whoami, more_
 from events.postback_event import *
 
 # from PIL import Image
@@ -51,8 +51,8 @@ def handle_message(event):
     print("=============================")
     user_id = event.source.user_id
     user_profile = get_profile(event)
+    time = datetime.fromtimestamp(event.timestamp/1000)
     try:
-        time = datetime.fromtimestamp(event.timestamp/1000)
         user_display_name = user_profile[0]
         picture_url = user_profile[2]
         status_message = user_profile[3]
@@ -87,12 +87,6 @@ def handle_message(event):
         except:
             line_bot_api.reply_message(event.reply_token,TextSendMessage(text='發生錯誤！'))
 
-    if mtext == '@即時影像辨識':
-        try:
-            download_RealTime(event)
-        except:
-            line_bot_api.reply_message(event.reply_token,TextSendMessage(text='發生錯誤！'))
-
     if mtext == '@馬鈴薯小學堂':
         try:
             introduction(event)
@@ -113,11 +107,9 @@ def handle_message(event):
             print(e)
         except:
             line_bot_api.reply_message(event.reply_token,TextSendMessage(text='發生錯誤！'))
-    if mtext == '@使用說明':
+    if mtext == '@說明':
         try:
-            line_bot_api.reply_message(event.reply_token, TextSendMessage(text=mtext))
-            sql_cmd = updateDB_FUNCTION(user_id, instructions_for_use=1)
-            db.engine.execute(sql_cmd)
+            more_(event)
         except:
             line_bot_api.reply_message(event.reply_token,TextSendMessage(text='發生錯誤！'))
     if mtext == '@關於':
@@ -127,12 +119,88 @@ def handle_message(event):
             db.engine.execute(sql_cmd)
         except:
             line_bot_api.reply_message(event.reply_token,TextSendMessage(text='發生錯誤！'))
-    
-    sql_cmd = f"""update potato.PROFILE set `TIME` = '{time}' where `USER_ID` = '{user_id}';"""
-    db.engine.execute(sql_cmd)
+    elif mtext[:3] == '###' and len(mtext) > 3:  #處理LIFF傳回的FORM資料
+        flist = mtext[3:].split('/')  #去除前三個「#」字元再分解字串
+        email = flist[0]  #取得輸入資料
+        birthday = flist[1]
+        gender = flist[2]
+        place_of_purchase = flist[3].split(',')
+        if place_of_purchase[-1].count("other-") == 1:
+            other_2 = place_of_purchase[-1].split("-")[1]
+        else:
+            other_2 = None
+        defect_type = flist[4]
+        market = supermarket = peasant_association = online = other = 0
+        market=1 if "market" in place_of_purchase else 0
+        supermarket=1 if "supermarket" in place_of_purchase else 0
+        peasant_association=1 if "peasant_association" in place_of_purchase else 0
+        online=1 if "online" in place_of_purchase else 0
+        if (place_of_purchase[-1].count("other-") == 1) or (place_of_purchase[-1].startswith("-")):
+            other = 1
+        
+        sprout = green = scab = black = hole = deformation = mold = 0
+        sprout=1 if "sprout" in defect_type else 0
+        green=1 if "green" in defect_type else 0
+        scab=1 if "scab" in defect_type else 0
+        black=1 if "black" in defect_type else 0
+        hole=1 if "hole" in defect_type else 0
+        deformation=1 if "deformation" in defect_type else 0
+        mold=1 if "mold" in defect_type else 0
 
-    sql_cmd = insertDB_USAGE_COUNT(time=time, user_id=user_id)
-    db.engine.execute(sql_cmd)
+        # print(flist)
+        # print("userid: "+user_id)
+        # print("email: "+ email)
+        # print("birthday:"+ birthday)
+        # print("gender: "+ gender)
+        # print(place_of_purchase)
+        # print("market: "+str(market), "supermarket: "+ str(supermarket), "農會: "+ str(peasant_association), "網購: "+str(online), "其他: "+ str(other), other_2)
+        # print(defect_type)
+        # print()
+        sql_cmd = f"""select `USER_ID` from potato.FEEDBACK where USER_ID= '{user_id}';"""
+        query_data = db.engine.execute(sql_cmd)
+        if len(list(query_data)) == 0:
+            sql_cmd = f"""insert into potato.FEEDBACK (`USER_ID`, `FILL_IN_TIME`, `MAIL`, `BIRTHDAY`, `GENDER`, 
+            `WET_MARKET`, `GROCERY_STORE`, `FARMERS_ASSOCIATION`, `ONLINE_SHOPPING`, `OTHER_1`, `OTHER_2`, 
+            `SPROUT`, `GREEN`, `SCAB`, `BLACK`, `HOLE`, `DEFORMATION`, `MOLD`) 
+                      values('{user_id}', '{time}', '{email}', '{birthday}', '{gender}', {market}, {supermarket}, 
+                      {peasant_association}, {online}, {other}, '{other_2}', {sprout}, {green}, {scab}, {black}, {hole}, {deformation}, {mold});"""
+            db.engine.execute(sql_cmd)
+            print(f"新增一筆問卷資料, user_id: {user_id}")
+        else:
+            sql_cmd = f"""update potato.FEEDBACK set 
+                            `FILL_IN_TIME` = '{time}',
+                            `MAIL` = '{email}',
+                            `BIRTHDAY` = '{birthday}',
+                            `GENDER` = '{gender}',
+                            `WET_MARKET`= {market}, 
+                            `GROCERY_STORE`={supermarket}, 
+                            `FARMERS_ASSOCIATION`={peasant_association}, 
+                            `ONLINE_SHOPPING`={online}, 
+                            `OTHER_1`={other}, 
+                            `OTHER_2`='{other_2}',
+                            `SPROUT`={sprout}, 
+                            `GREEN`={green}, 
+                            `SCAB`={scab}, 
+                            `BLACK`={black}, 
+                            `HOLE`={hole}, 
+                            `DEFORMATION`={deformation}, 
+                            `MOLD`={mold}
+                        where `USER_ID` = '{user_id}';"""
+            db.engine.execute(sql_cmd)
+            print(f"更新一筆問卷資料, user_id: {user_id}")
+        
+    
+    sql_cmd = f"""select `TIME` from potato.PROFILE where `TIME` = '{time}';"""
+    query_data = db.engine.execute(sql_cmd)
+    if len(list(query_data)) == 0:
+        sql_cmd = f"""update potato.PROFILE set `TIME` = '{time}' where `USER_ID` = '{user_id}';"""
+        db.engine.execute(sql_cmd)
+
+    sql_cmd = f"""select `TIME` from potato.USAGE_COUNT where TIME= '{time}';"""
+    query_data = db.engine.execute(sql_cmd)
+    if len(list(query_data)) == 0:
+        sql_cmd = insertDB_USAGE_COUNT(time=time, user_id=user_id)
+        db.engine.execute(sql_cmd)
         
 
 # image message type 
@@ -188,12 +256,17 @@ def handle_message(event):
         sql_cmd = updateDB_FUNCTION(user_id, predict=1)
         db.engine.execute(sql_cmd)
 
-        sql_cmd = insertDB_USAGE_COUNT(time=time, user_id=user_id)
-        db.engine.execute(sql_cmd)
+        sql_cmd = f"""select `TIME` from potato.USAGE_COUNT where TIME= '{time}';"""
+        query_data = db.engine.execute(sql_cmd)
+        if len(list(query_data)) == 0:
+            sql_cmd = insertDB_USAGE_COUNT(time=time, user_id=user_id)
+            db.engine.execute(sql_cmd)
 
-        sql_cmd = f"""update potato.PROFILE set `TIME` = '{time}' where `USER_ID` = '{user_id}';"""
-        db.engine.execute(sql_cmd)
-
+        sql_cmd = f"""select `TIME` from potato.PROFILE where `TIME` = '{time}';"""
+        query_data = db.engine.execute(sql_cmd)
+        if len(list(query_data)) == 0:
+            sql_cmd = f"""update potato.PROFILE set `TIME` = '{time}' where `USER_ID` = '{user_id}';"""
+            db.engine.execute(sql_cmd)
     except:
         line_bot_api.reply_message(event.reply_token,TextSendMessage(text='發生錯誤！'))
 
@@ -261,12 +334,16 @@ def handle_postback(event):
             introduct_sprout(event)
             sql_cmd = updateDB_DESCRIPTION_OF_DEFECTS(user_id, I1_sprout=1)
             db.engine.execute(sql_cmd)
+            sql_cmd = updateDB_FUNCTION(user_id, defect=1)
+            db.engine.execute(sql_cmd)
         except:
             line_bot_api.reply_message(event.reply_token,TextSendMessage(text='發生錯誤！'))
     elif event.postback.data == "Green":
         try:
             introduct_green(event)
             sql_cmd = updateDB_DESCRIPTION_OF_DEFECTS(user_id, I2_green=1)
+            db.engine.execute(sql_cmd)
+            sql_cmd = updateDB_FUNCTION(user_id, defect=1)
             db.engine.execute(sql_cmd)
         except:
             line_bot_api.reply_message(event.reply_token,TextSendMessage(text='發生錯誤！'))
@@ -275,12 +352,16 @@ def handle_postback(event):
             introduct_scab(event)
             sql_cmd = updateDB_DESCRIPTION_OF_DEFECTS(user_id, I3_scab=1)
             db.engine.execute(sql_cmd)
+            sql_cmd = updateDB_FUNCTION(user_id, defect=1)
+            db.engine.execute(sql_cmd)
         except:
             line_bot_api.reply_message(event.reply_token,TextSendMessage(text='發生錯誤！'))
     elif event.postback.data == "Black":
         try:
             introduct_black(event)
             sql_cmd = updateDB_DESCRIPTION_OF_DEFECTS(user_id, I4_black=1)
+            db.engine.execute(sql_cmd)
+            sql_cmd = updateDB_FUNCTION(user_id, defect=1)
             db.engine.execute(sql_cmd)
         except:
             line_bot_api.reply_message(event.reply_token,TextSendMessage(text='發生錯誤！'))
@@ -289,12 +370,16 @@ def handle_postback(event):
             introduct_hole(event)
             sql_cmd = updateDB_DESCRIPTION_OF_DEFECTS(user_id, I5_hole=1)
             db.engine.execute(sql_cmd)
+            sql_cmd = updateDB_FUNCTION(user_id, defect=1)
+            db.engine.execute(sql_cmd)
         except:
             line_bot_api.reply_message(event.reply_token,TextSendMessage(text='發生錯誤！'))
     elif event.postback.data == "Deformation":
         try:
             introduct_deformation(event)
             sql_cmd = updateDB_DESCRIPTION_OF_DEFECTS(user_id, I6_deformation=1)
+            db.engine.execute(sql_cmd)
+            sql_cmd = updateDB_FUNCTION(user_id, defect=1)
             db.engine.execute(sql_cmd)
         except:
             line_bot_api.reply_message(event.reply_token,TextSendMessage(text='發生錯誤！'))
@@ -303,6 +388,8 @@ def handle_postback(event):
             introduct_mold(event)
             sql_cmd = updateDB_DESCRIPTION_OF_DEFECTS(user_id, I7_mold=1)
             db.engine.execute(sql_cmd)
+            sql_cmd = updateDB_FUNCTION(user_id, defect=1)
+            db.engine.execute(sql_cmd)
         except:
             line_bot_api.reply_message(event.reply_token,TextSendMessage(text='發生錯誤！'))
     elif event.postback.data == "Class7":
@@ -310,19 +397,141 @@ def handle_postback(event):
             introduct_all(event)
             sql_cmd = updateDB_DESCRIPTION_OF_DEFECTS(user_id, I1_sprout=1, I2_green=1, I3_scab=1, I4_black=1, I5_hole=1, I6_deformation=1, I7_mold=1)
             db.engine.execute(sql_cmd)
+            sql_cmd = updateDB_FUNCTION(user_id, defect=1)
+            db.engine.execute(sql_cmd)
+        except:
+            line_bot_api.reply_message(event.reply_token,TextSendMessage(text='發生錯誤！'))
+    
+    # 品種介紹相關
+    if event.postback.data == "variety_introduction":  #品種介紹導覽
+        try:
+            cultivar(event)
+            
+        except:
+            line_bot_api.reply_message(event.reply_token,TextSendMessage(text='發生錯誤！'))
+    elif event.postback.data == "克尼伯":
+        try:
+            cultivar_0(event)
+            sql_cmd = updateDB_FUNCTION(user_id, cultivar=1)
+            db.engine.execute(sql_cmd)
+        except:
+            line_bot_api.reply_message(event.reply_token,TextSendMessage(text='發生錯誤！'))
+    elif event.postback.data == "台農一號":
+        try:
+            cultivar_1(event)
+            sql_cmd = updateDB_FUNCTION(user_id, cultivar=1)
+            db.engine.execute(sql_cmd)
+        except:
+            line_bot_api.reply_message(event.reply_token,TextSendMessage(text='發生錯誤！'))
+    elif event.postback.data == "台農三號":
+        try:
+            cultivar_2(event)
+            sql_cmd = updateDB_FUNCTION(user_id, cultivar=1)
+            db.engine.execute(sql_cmd)
+        except:
+            line_bot_api.reply_message(event.reply_token,TextSendMessage(text='發生錯誤！'))
+    elif event.postback.data == "台農四號":
+        try:
+            cultivar_3(event)
+            sql_cmd = updateDB_FUNCTION(user_id, cultivar=1)
+            db.engine.execute(sql_cmd)
+        except:
+            line_bot_api.reply_message(event.reply_token,TextSendMessage(text='發生錯誤！'))
+    elif event.postback.data == "種苗二號":
+        try:
+            cultivar_4(event)
+            sql_cmd = updateDB_FUNCTION(user_id, cultivar=1)
+            db.engine.execute(sql_cmd)
+        except:
+            line_bot_api.reply_message(event.reply_token,TextSendMessage(text='發生錯誤！'))
+    elif event.postback.data == "種苗四號":
+        try:
+            cultivar_5(event)
+            sql_cmd = updateDB_FUNCTION(user_id, cultivar=1)
+            db.engine.execute(sql_cmd)
+        except:
+            line_bot_api.reply_message(event.reply_token,TextSendMessage(text='發生錯誤！'))
+    elif event.postback.data == "種苗六號":
+        try:
+            cultivar_6(event)
+            sql_cmd = updateDB_FUNCTION(user_id, cultivar=1)
+            db.engine.execute(sql_cmd)
+        except:
+            line_bot_api.reply_message(event.reply_token,TextSendMessage(text='發生錯誤！'))
+    elif event.postback.data == "大利":
+        try:
+            cultivar_7(event)
+            sql_cmd = updateDB_FUNCTION(user_id, cultivar=1)
+            db.engine.execute(sql_cmd)
+        except:
+            line_bot_api.reply_message(event.reply_token,TextSendMessage(text='發生錯誤！'))
+    elif event.postback.data == "大西洋":
+        try:
+            cultivar_8(event)
+            sql_cmd = updateDB_FUNCTION(user_id, cultivar=1)
+            db.engine.execute(sql_cmd)
+        except:
+            line_bot_api.reply_message(event.reply_token,TextSendMessage(text='發生錯誤！'))
+    elif event.postback.data == "紅皮馬鈴薯":
+        try:
+            cultivar_9(event)
+            sql_cmd = updateDB_FUNCTION(user_id, cultivar=1)
+            db.engine.execute(sql_cmd)
+        except:
+            line_bot_api.reply_message(event.reply_token,TextSendMessage(text='發生錯誤！'))
+    elif event.postback.data == "褐皮馬鈴薯":
+        try:
+            cultivar_10(event)
+            sql_cmd = updateDB_FUNCTION(user_id, cultivar=1)
+            db.engine.execute(sql_cmd)
+        except:
+            line_bot_api.reply_message(event.reply_token,TextSendMessage(text='發生錯誤！'))
+    elif event.postback.data == "白玉馬鈴薯":
+        try:
+            cultivar_11(event)
+            sql_cmd = updateDB_FUNCTION(user_id, cultivar=1)
+            db.engine.execute(sql_cmd)
+        except:
+            line_bot_api.reply_message(event.reply_token,TextSendMessage(text='發生錯誤！'))
+    elif event.postback.data == "彩色馬鈴薯":
+        try:
+            cultivar_12(event)
+            sql_cmd = updateDB_FUNCTION(user_id, cultivar=1)
+            db.engine.execute(sql_cmd)
         except:
             line_bot_api.reply_message(event.reply_token,TextSendMessage(text='發生錯誤！'))
 
+
+    if event.postback.data == "About":
+        try:
+            test(event)
+            sql_cmd = updateDB_FUNCTION(user_id, about=1)
+            db.engine.execute(sql_cmd)
+        except:
+            line_bot_api.reply_message(event.reply_token,TextSendMessage(text='發生錯誤！'))
+    elif event.postback.data == "Manual":
+        try:
+            manual(event)
+            sql_cmd = updateDB_FUNCTION(user_id, instructions_for_use=1)
+            db.engine.execute(sql_cmd)
+        except:
+            line_bot_api.reply_message(event.reply_token,TextSendMessage(text='發生錯誤！'))
+            
+
     time = datetime.fromtimestamp(event.timestamp/1000)
 
-    sql_cmd = f"""update potato.PROFILE set `TIME` = '{time}' where `USER_ID` = '{user_id}';"""
-    db.engine.execute(sql_cmd)
+    sql_cmd = f"""select `TIME` from potato.PROFILE where `TIME` = '{time}';"""
+    query_data = db.engine.execute(sql_cmd)
+    if len(list(query_data)) == 0:
+        sql_cmd = f"""update potato.PROFILE set `TIME` = '{time}' where `USER_ID` = '{user_id}';"""
+        db.engine.execute(sql_cmd)
 
     sql_cmd = f"""select `TIME` from potato.USAGE_COUNT where TIME= '{time}';"""
     query_data = db.engine.execute(sql_cmd)
     if len(list(query_data)) == 0:
         sql_cmd = insertDB_USAGE_COUNT(time=time, user_id=user_id)
         db.engine.execute(sql_cmd)
+
 
 
 # Insert/Update DB 
@@ -367,6 +576,45 @@ def insertDB_USAGE_COUNT(time, user_id):
     print("新增time事件")
     return sql_cmd
 
+
+
+#LIFF靜態頁面
+@app.route('/page')
+def page():
+	return render_template('questionnaire.html', liffid = liffid)
+
+# @app.route('/test1', methods=['GET','POST'])
+# def test1():
+#     if request.method == 'GET':
+#         return render_template(
+#                             "test1.html",
+#                             liffid = liffid
+#                             )
+#     elif request.method == 'POST':
+#         email = request.values['email']
+#         birthday = request.values['birthday']
+#         gender = request.values['gender']
+#         place_of_purchase = request.values ['place_of_purchase']
+#         defect_type = request.values['defect_type']
+#         print(email, birthday, gender, place_of_purchase, defect_type)
+#         return 'OK'
+    
+# @app.route('/test2', methods=['GET','POST'])
+# def test2():
+#     if request.method == 'GET':
+#         return render_template(
+#                             "test2.html",
+#                             liffid = liffid
+#                             )
+#     elif request.method == 'POST':
+#         email = request.form.get('email')
+#         birthday = request.form.get('birthday')
+#         gender = request.form.get('gender')
+#         place_of_purchase = request.values['place_of_purchase']
+#         other_purchase = request.form.get('other_purchase')
+#         defect_type = request.values['defect_type']
+#         print(email, birthday, gender, place_of_purchase, other_purchase, defect_type)
+#         return 'OK'
 
 if __name__ == '__main__':
     app.run(debug=True)

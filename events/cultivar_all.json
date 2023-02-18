@@ -1,0 +1,234 @@
+{
+  "type": "bubble",
+  "size": "giga",
+  "header": {
+    "type": "box",
+    "layout": "horizontal",
+    "contents": [
+      {
+        "type": "text",
+        "text": "馬鈴薯品種介紹",
+        "weight": "bold",
+        "size": "sm",
+        "color": "#AAAAAA",
+        "contents": []
+      }
+    ]
+  },
+  "hero": {
+    "type": "image",
+    "url": "https://storage.googleapis.com/louisai/LineBot/fresh-organic-potatoes-in-a-white-ceramic-bowl-with-herbs-free-photo.jpg",
+    "size": "full",
+    "aspectRatio": "20:13",
+    "aspectMode": "cover",
+    "action": {
+      "type": "uri",
+      "label": "Action",
+      "uri": "https://linecorp.com/"
+    }
+  },
+  "body": {
+    "type": "box",
+    "layout": "vertical",
+    "spacing": "md",
+    "contents": [
+      {
+        "type": "text",
+        "text": "國產／引進國內種植",
+        "size": "xs",
+        "color": "#8DD522FF",
+        "contents": []
+      },
+      {
+        "type": "box",
+        "layout": "horizontal",
+        "contents": [
+          {
+            "type": "box",
+            "layout": "vertical",
+            "contents": [
+              {
+                "type": "button",
+                "action": {
+                  "type": "postback",
+                  "label": "克尼伯",
+                  "text": "克尼伯",
+                  "data": "克尼伯"
+                }
+              },
+              {
+                "type": "button",
+                "action": {
+                  "type": "postback",
+                  "label": "台農四號",
+                  "text": "台農四號",
+                  "data": "台農四號"
+                }
+              },
+              {
+                "type": "button",
+                "action": {
+                  "type": "postback",
+                  "label": "種苗六號",
+                  "text": "種苗六號",
+                  "data": "種苗六號"
+                }
+              }
+            ]
+          },
+          {
+            "type": "box",
+            "layout": "vertical",
+            "contents": [
+              {
+                "type": "button",
+                "action": {
+                  "type": "postback",
+                  "label": "台農一號",
+                  "text": "台農一號",
+                  "data": "台農一號"
+                }
+              },
+              {
+                "type": "button",
+                "action": {
+                  "type": "postback",
+                  "label": "種苗二號",
+                  "text": "種苗二號",
+                  "data": "種苗二號"
+                }
+              },
+              {
+                "type": "button",
+                "action": {
+                  "type": "postback",
+                  "label": "大利",
+                  "text": "大利",
+                  "data": "大利"
+                }
+              }
+            ]
+          },
+          {
+            "type": "box",
+            "layout": "vertical",
+            "contents": [
+              {
+                "type": "button",
+                "action": {
+                  "type": "postback",
+                  "label": "台農三號",
+                  "text": "台農三號",
+                  "data": "台農三號"
+                }
+              },
+              {
+                "type": "button",
+                "action": {
+                  "type": "postback",
+                  "label": "種苗四號",
+                  "text": "種苗四號",
+                  "data": "種苗四號"
+                }
+              },
+              {
+                "type": "button",
+                "action": {
+                  "type": "postback",
+                  "label": "大西洋",
+                  "text": "大西洋",
+                  "data": "大西洋"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "text",
+        "text": "進口",
+        "size": "xs",
+        "color": "#8DD522FF",
+        "contents": []
+      },
+      {
+        "type": "box",
+        "layout": "horizontal",
+        "contents": [
+          {
+            "type": "box",
+            "layout": "vertical",
+            "contents": [
+              {
+                "type": "button",
+                "action": {
+                  "type": "postback",
+                  "label": "紅皮馬鈴薯",
+                  "text": "紅皮馬鈴薯",
+                  "data": "紅皮馬鈴薯"
+                }
+              },
+              {
+                "type": "button",
+                "action": {
+                  "type": "postback",
+                  "label": "彩色馬鈴薯",
+                  "text": "彩色馬鈴薯",
+                  "data": "彩色馬鈴薯"
+                }
+              }
+            ]
+          },
+          {
+            "type": "box",
+            "layout": "vertical",
+            "contents": [
+              {
+                "type": "button",
+                "action": {
+                  "type": "postback",
+                  "label": "褐皮馬鈴薯",
+                  "text": "褐皮馬鈴薯",
+                  "data": "褐皮馬鈴薯"
+                }
+              }
+            ]
+          },
+          {
+            "type": "box",
+            "layout": "vertical",
+            "contents": [
+              {
+                "type": "button",
+                "action": {
+                  "type": "postback",
+                  "label": "白玉馬鈴薯",
+                  "text": "白玉馬鈴薯",
+                  "data": "白玉馬鈴薯"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "footer": {
+    "type": "box",
+    "layout": "vertical",
+    "contents": [
+      {
+        "type": "separator"
+      },
+      {
+        "type": "button",
+        "action": {
+          "type": "postback",
+          "label": "切換到 瑕疵導覽",
+          "text": "瑕疵導覽",
+          "data": "defect_introduction"
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,1635 @@
+[
+    {
+        "type": "bubble",
+        "header": {
+          "type": "box",
+          "layout": "horizontal",
+          "contents": [
+            {
+              "type": "text",
+              "text": "馬鈴薯品種介紹",
+              "weight": "bold",
+              "size": "sm",
+              "color": "#AAAAAA",
+              "contents": []
+            }
+          ]
+        },
+        "hero": {
+          "type": "image",
+          "url": "https://storage.googleapis.com/louisai/LineBot/克尼伯.jpg",
+          "size": "full",
+          "aspectRatio": "20:13",
+          "aspectMode": "cover",
+          "action": {
+            "type": "uri",
+            "label": "Action",
+            "uri": "https://linecorp.com/"
+          }
+        },
+        "body": {
+          "type": "box",
+          "layout": "vertical",
+          "spacing": "md",
+          "contents": [
+            {
+              "type": "box",
+              "layout": "vertical",
+              "contents": [
+                {
+                  "type": "text",
+                  "text": "克尼伯馬鈴薯",
+                  "weight": "bold",
+                  "size": "xl",
+                  "contents": []
+                }
+              ]
+            },
+            {
+              "type": "box",
+              "layout": "vertical",
+              "contents": [
+                {
+                  "type": "box",
+                  "layout": "baseline",
+                  "contents": [
+                    {
+                      "type": "text",
+                      "text": "特色",
+                      "weight": "bold",
+                      "color": "#1683EBFF",
+                      "flex": 2,
+                      "contents": []
+                    },
+                    {
+                      "type": "text",
+                      "text": "美國引進，俗稱大葉種，早熟、薯大、白肉、白皮、芽眼淺、 薯形呈扁橢圓形，種植面積約占8成，是國產馬鈴薯最主要的品種， 鮮食和加工成洋芋片都可以。 品種產量低且不耐病毒病及晚疫病，產量容易短缺。",
+                      "size": "sm",
+                      "flex": 5,
+                      "wrap": true,
+                      "contents": []
+                    }
+                  ]
+                },
+                {
+                  "type": "box",
+                  "layout": "baseline",
+                  "contents": [
+                    {
+                      "type": "text",
+                      "text": "質地",
+                      "weight": "bold",
+                      "color": "#1683EBFF",
+                      "flex": 2,
+                      "contents": []
+                    },
+                    {
+                      "type": "text",
+                      "text": "粉質",
+                      "size": "sm",
+                      "flex": 5,
+                      "contents": []
+                    }
+                  ]
+                },
+                {
+                  "type": "box",
+                  "layout": "baseline",
+                  "contents": [
+                    {
+                      "type": "text",
+                      "text": "適合料理",
+                      "weight": "bold",
+                      "color": "#1683EBFF",
+                      "flex": 2,
+                      "wrap": true,
+                      "contents": []
+                    },
+                    {
+                      "type": "text",
+                      "text": "日式馬鈴薯燉煮、馬鈴薯濃湯、炸洋芋片。",
+                      "size": "sm",
+                      "flex": 5,
+                      "wrap": true,
+                      "contents": []
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "footer": {
+          "type": "box",
+          "layout": "vertical",
+          "contents": [
+            {
+              "type": "separator"
+            },
+            {
+              "type": "button",
+              "action": {
+                "type": "postback",
+                "label": "返回 品種介紹導覽",
+                "text": "品種介紹",
+                "data": "variety_introduction"
+              }
+            },
+            {
+              "type": "button",
+              "action": {
+                "type": "postback",
+                "label": "切換到 瑕疵導覽",
+                "text": "瑕疵導覽",
+                "data": "defect_introduction"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "type": "bubble",
+        "header": {
+          "type": "box",
+          "layout": "horizontal",
+          "contents": [
+            {
+              "type": "text",
+              "text": "馬鈴薯品種介紹",
+              "weight": "bold",
+              "size": "sm",
+              "color": "#AAAAAA",
+              "contents": []
+            }
+          ]
+        },
+        "hero": {
+          "type": "image",
+          "url": "https://storage.googleapis.com/louisai/LineBot/台農一號.jpg",
+          "size": "full",
+          "aspectRatio": "20:13",
+          "aspectMode": "cover",
+          "action": {
+            "type": "uri",
+            "label": "Action",
+            "uri": "https://linecorp.com/"
+          }
+        },
+        "body": {
+          "type": "box",
+          "layout": "vertical",
+          "spacing": "md",
+          "contents": [
+            {
+              "type": "box",
+              "layout": "vertical",
+              "contents": [
+                {
+                  "type": "text",
+                  "text": "台農一號",
+                  "weight": "bold",
+                  "size": "xl",
+                  "contents": []
+                }
+              ]
+            },
+            {
+              "type": "box",
+              "layout": "vertical",
+              "contents": [
+                {
+                  "type": "box",
+                  "layout": "baseline",
+                  "contents": [
+                    {
+                      "type": "text",
+                      "text": "特色",
+                      "weight": "bold",
+                      "color": "#1683EBFF",
+                      "flex": 2,
+                      "contents": []
+                    },
+                    {
+                      "type": "text",
+                      "text": "薯形黃色橢圓、薯肉鮮黃、薯皮光滑芽眼淺。 口感鬆軟、有人參味、適合鮮食。 但因糖分較高，加工油炸後會褐化，所以較不適合做成薯片。",
+                      "size": "sm",
+                      "flex": 5,
+                      "wrap": true,
+                      "contents": []
+                    }
+                  ]
+                },
+                {
+                  "type": "box",
+                  "layout": "baseline",
+                  "contents": [
+                    {
+                      "type": "text",
+                      "text": "質地",
+                      "weight": "bold",
+                      "color": "#1683EBFF",
+                      "flex": 2,
+                      "contents": []
+                    },
+                    {
+                      "type": "text",
+                      "text": "蠟質",
+                      "size": "sm",
+                      "flex": 5,
+                      "contents": []
+                    }
+                  ]
+                },
+                {
+                  "type": "box",
+                  "layout": "baseline",
+                  "contents": [
+                    {
+                      "type": "text",
+                      "text": "適合料理",
+                      "weight": "bold",
+                      "color": "#1683EBFF",
+                      "flex": 2,
+                      "wrap": true,
+                      "contents": []
+                    },
+                    {
+                      "type": "text",
+                      "text": "炒馬鈴薯絲（一般稱炒土豆絲）、咖哩料理、日式馬鈴薯燉肉、蒸、煮湯、炒。",
+                      "size": "sm",
+                      "flex": 5,
+                      "wrap": true,
+                      "contents": []
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "footer": {
+          "type": "box",
+          "layout": "vertical",
+          "contents": [
+            {
+              "type": "separator"
+            },
+            {
+              "type": "button",
+              "action": {
+                "type": "postback",
+                "label": "返回 品種介紹導覽",
+                "text": "品種介紹",
+                "data": "variety_introduction"
+              }
+            },
+            {
+              "type": "button",
+              "action": {
+                "type": "postback",
+                "label": "切換到 瑕疵導覽",
+                "text": "瑕疵導覽",
+                "data": "defect_introduction"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "type": "bubble",
+        "header": {
+          "type": "box",
+          "layout": "horizontal",
+          "contents": [
+            {
+              "type": "text",
+              "text": "馬鈴薯品種介紹",
+              "weight": "bold",
+              "size": "sm",
+              "color": "#AAAAAA",
+              "contents": []
+            }
+          ]
+        },
+        "hero": {
+          "type": "image",
+          "url": "https://storage.googleapis.com/louisai/LineBot/台農三號.jpg",
+          "size": "full",
+          "aspectRatio": "20:16",
+          "aspectMode": "cover",
+          "action": {
+            "type": "uri",
+            "label": "Action",
+            "uri": "https://linecorp.com/"
+          }
+        },
+        "body": {
+          "type": "box",
+          "layout": "vertical",
+          "spacing": "md",
+          "contents": [
+            {
+              "type": "box",
+              "layout": "vertical",
+              "contents": [
+                {
+                  "type": "text",
+                  "text": "台農三號",
+                  "weight": "bold",
+                  "size": "xl",
+                  "contents": []
+                }
+              ]
+            },
+            {
+              "type": "box",
+              "layout": "vertical",
+              "contents": [
+                {
+                  "type": "box",
+                  "layout": "baseline",
+                  "contents": [
+                    {
+                      "type": "text",
+                      "text": "特色",
+                      "weight": "bold",
+                      "color": "#1683EBFF",
+                      "flex": 2,
+                      "contents": []
+                    },
+                    {
+                      "type": "text",
+                      "text": "薯球圓形，薯皮淺黃色，薯肉黃白色，芽体粉色，芽眼深度中等。 豐產、中生、無性繁殖品種。 株型中高、株冠大而緊密、葉色濃綠、莖綠色。 花白色，開花少。 對PVY病毒、軟腐病、晚疫病等表現中抗。 適合鮮食。",
+                      "size": "sm",
+                      "flex": 6,
+                      "wrap": true,
+                      "contents": []
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "footer": {
+          "type": "box",
+          "layout": "vertical",
+          "contents": [
+            {
+              "type": "separator"
+            },
+            {
+              "type": "button",
+              "action": {
+                "type": "postback",
+                "label": "返回 品種介紹導覽",
+                "text": "品種介紹",
+                "data": "variety_introduction"
+              }
+            },
+            {
+              "type": "button",
+              "action": {
+                "type": "postback",
+                "label": "切換到 瑕疵導覽",
+                "text": "瑕疵導覽",
+                "data": "defect_introduction"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "type": "bubble",
+        "header": {
+          "type": "box",
+          "layout": "horizontal",
+          "contents": [
+            {
+              "type": "text",
+              "text": "馬鈴薯品種介紹",
+              "weight": "bold",
+              "size": "sm",
+              "color": "#AAAAAA",
+              "contents": []
+            }
+          ]
+        },
+        "hero": {
+          "type": "image",
+          "url": "https://storage.googleapis.com/louisai/LineBot/台農四號.jpg",
+          "size": "full",
+          "aspectRatio": "20:13",
+          "aspectMode": "cover",
+          "action": {
+            "type": "uri",
+            "label": "Action",
+            "uri": "https://linecorp.com/"
+          }
+        },
+        "body": {
+          "type": "box",
+          "layout": "vertical",
+          "spacing": "md",
+          "contents": [
+            {
+              "type": "box",
+              "layout": "vertical",
+              "contents": [
+                {
+                  "type": "text",
+                  "text": "台農四號",
+                  "weight": "bold",
+                  "size": "xl",
+                  "contents": []
+                }
+              ]
+            },
+            {
+              "type": "box",
+              "layout": "vertical",
+              "contents": [
+                {
+                  "type": "box",
+                  "layout": "baseline",
+                  "contents": [
+                    {
+                      "type": "text",
+                      "text": "特色",
+                      "weight": "bold",
+                      "color": "#1683EBFF",
+                      "flex": 2,
+                      "contents": []
+                    },
+                    {
+                      "type": "text",
+                      "text": "以「大西洋」為親本，再與其他高產品系雜交後而得， 中大薯的比例可達70%以上，極具商業生產價值的新品種。 薯型大小均勻、外型佳、芽眼淺、產量高，具馬鈴薯風味濃郁。 較佳的晚疫病及淹水耐受性,可減少因病害及多雨環境造成的損失。 容易貯藏、還原糖含量低，加工油炸後不易褐化，具優良加工特性。 薯塊鬆軟，長時間燉煮後外觀維持完整不會糊化。",
+                      "size": "sm",
+                      "flex": 5,
+                      "wrap": true,
+                      "contents": []
+                    }
+                  ]
+                },
+                {
+                  "type": "box",
+                  "layout": "baseline",
+                  "contents": [
+                    {
+                      "type": "text",
+                      "text": "適合料理",
+                      "weight": "bold",
+                      "color": "#1683EBFF",
+                      "flex": 2,
+                      "wrap": true,
+                      "contents": []
+                    },
+                    {
+                      "type": "text",
+                      "text": "咖哩及燉肉等家常馬鈴薯料理。",
+                      "size": "sm",
+                      "flex": 5,
+                      "wrap": true,
+                      "contents": []
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "footer": {
+          "type": "box",
+          "layout": "vertical",
+          "contents": [
+            {
+              "type": "separator"
+            },
+            {
+              "type": "button",
+              "action": {
+                "type": "postback",
+                "label": "返回 品種介紹導覽",
+                "text": "品種介紹",
+                "data": "variety_introduction"
+              }
+            },
+            {
+              "type": "button",
+              "action": {
+                "type": "postback",
+                "label": "切換到 瑕疵導覽",
+                "text": "瑕疵導覽",
+                "data": "defect_introduction"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "type": "bubble",
+        "header": {
+          "type": "box",
+          "layout": "horizontal",
+          "contents": [
+            {
+              "type": "text",
+              "text": "馬鈴薯品種介紹",
+              "weight": "bold",
+              "size": "sm",
+              "color": "#AAAAAA",
+              "contents": []
+            }
+          ]
+        },
+        "hero": {
+          "type": "image",
+          "url": "https://storage.googleapis.com/louisai/LineBot/種苗二號.jpg",
+          "size": "full",
+          "aspectRatio": "20:19",
+          "aspectMode": "cover",
+          "action": {
+            "type": "uri",
+            "label": "Action",
+            "uri": "https://linecorp.com/"
+          }
+        },
+        "body": {
+          "type": "box",
+          "layout": "vertical",
+          "spacing": "md",
+          "contents": [
+            {
+              "type": "box",
+              "layout": "vertical",
+              "contents": [
+                {
+                  "type": "text",
+                  "text": "種苗二號",
+                  "weight": "bold",
+                  "size": "xl",
+                  "contents": []
+                }
+              ]
+            },
+            {
+              "type": "box",
+              "layout": "vertical",
+              "contents": [
+                {
+                  "type": "box",
+                  "layout": "baseline",
+                  "contents": [
+                    {
+                      "type": "text",
+                      "text": "特色",
+                      "weight": "bold",
+                      "color": "#1683EBFF",
+                      "flex": 2,
+                      "contents": []
+                    },
+                    {
+                      "type": "text",
+                      "text": "薯球土黃色圓形、晚生種、植株强健、可抗晚疫病。 毒病、薯皮比大葉種厚實、不易受傷、高產量。 葉色濃綠，心葉帶黃綠色，在秋冬作栽培偶開白花。 適合加工，油炸後的薯片色澤均勻、風味良好。",
+                      "size": "sm",
+                      "flex": 6,
+                      "wrap": true,
+                      "contents": []
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "footer": {
+          "type": "box",
+          "layout": "vertical",
+          "contents": [
+            {
+              "type": "separator"
+            },
+            {
+              "type": "button",
+              "action": {
+                "type": "postback",
+                "label": "返回 品種介紹導覽",
+                "text": "品種介紹",
+                "data": "variety_introduction"
+              }
+            },
+            {
+              "type": "button",
+              "action": {
+                "type": "postback",
+                "label": "切換到 瑕疵導覽",
+                "text": "瑕疵導覽",
+                "data": "defect_introduction"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "type": "bubble",
+        "header": {
+          "type": "box",
+          "layout": "horizontal",
+          "contents": [
+            {
+              "type": "text",
+              "text": "馬鈴薯品種介紹",
+              "weight": "bold",
+              "size": "sm",
+              "color": "#AAAAAA",
+              "contents": []
+            }
+          ]
+        },
+        "hero": {
+          "type": "image",
+          "url": "https://storage.googleapis.com/louisai/LineBot/種苗4號.jpg",
+          "size": "full",
+          "aspectRatio": "20:13",
+          "aspectMode": "cover",
+          "action": {
+            "type": "uri",
+            "label": "Action",
+            "uri": "https://linecorp.com/"
+          }
+        },
+        "body": {
+          "type": "box",
+          "layout": "vertical",
+          "spacing": "md",
+          "contents": [
+            {
+              "type": "box",
+              "layout": "vertical",
+              "contents": [
+                {
+                  "type": "text",
+                  "text": "種苗四號",
+                  "weight": "bold",
+                  "size": "xl",
+                  "contents": []
+                }
+              ]
+            },
+            {
+              "type": "box",
+              "layout": "vertical",
+              "contents": [
+                {
+                  "type": "box",
+                  "layout": "baseline",
+                  "contents": [
+                    {
+                      "type": "text",
+                      "text": "特色",
+                      "weight": "bold",
+                      "color": "#1683EBFF",
+                      "flex": 2,
+                      "contents": []
+                    },
+                    {
+                      "type": "text",
+                      "text": "薯球黃褐色卵圓形、晚生、生長旺盛、秋冬栽培容易、不易裂薯等良好特性。 花色呈白色。 結薯量高，單位面積產量高，對於病毒病及晚疫病具有耐病性。 鮮食口感佳，具有鮮食市場價值，油炸後薯肉深黃帶褐色，不適於加工馬鈴薯洋芋片。",
+                      "size": "sm",
+                      "flex": 6,
+                      "wrap": true,
+                      "contents": []
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "footer": {
+          "type": "box",
+          "layout": "vertical",
+          "contents": [
+            {
+              "type": "separator"
+            },
+            {
+              "type": "button",
+              "action": {
+                "type": "postback",
+                "label": "返回 品種介紹導覽",
+                "text": "品種介紹",
+                "data": "variety_introduction"
+              }
+            },
+            {
+              "type": "button",
+              "action": {
+                "type": "postback",
+                "label": "切換到 瑕疵導覽",
+                "text": "瑕疵導覽",
+                "data": "defect_introduction"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "type": "bubble",
+        "header": {
+          "type": "box",
+          "layout": "horizontal",
+          "contents": [
+            {
+              "type": "text",
+              "text": "馬鈴薯品種介紹",
+              "weight": "bold",
+              "size": "sm",
+              "color": "#AAAAAA",
+              "contents": []
+            }
+          ]
+        },
+        "hero": {
+          "type": "image",
+          "url": "https://storage.googleapis.com/louisai/LineBot/種苗六號.jpg",
+          "size": "full",
+          "aspectRatio": "20:19",
+          "aspectMode": "fit",
+          "action": {
+            "type": "uri",
+            "label": "Action",
+            "uri": "https://linecorp.com/"
+          }
+        },
+        "body": {
+          "type": "box",
+          "layout": "vertical",
+          "spacing": "md",
+          "contents": [
+            {
+              "type": "box",
+              "layout": "vertical",
+              "contents": [
+                {
+                  "type": "text",
+                  "text": "種苗六號",
+                  "weight": "bold",
+                  "size": "xl",
+                  "contents": []
+                }
+              ]
+            },
+            {
+              "type": "box",
+              "layout": "vertical",
+              "contents": [
+                {
+                  "type": "box",
+                  "layout": "baseline",
+                  "contents": [
+                    {
+                      "type": "text",
+                      "text": "特色",
+                      "weight": "bold",
+                      "color": "#1683EBFF",
+                      "flex": 2,
+                      "contents": []
+                    },
+                    {
+                      "type": "text",
+                      "text": "薯球為短卵圓形、薯皮黃色、薯肉白色、不易裂薯。 單位面積產量高，每公頃產量達34公噸，可售薯比例高達73%。 具有生長勢強且栽培容易特性，晚疫病耐性比克尼伯更佳。",
+                      "size": "sm",
+                      "flex": 6,
+                      "wrap": true,
+                      "contents": []
+                    }
+                  ]
+                },
+                {
+                  "type": "box",
+                  "layout": "baseline",
+                  "contents": [
+                    {
+                      "type": "filler",
+                      "flex": 2
+                    },
+                    {
+                      "type": "text",
+                      "text": "加工與鮮食兼用特色，塊莖有高固形物，經加工廠適用溫度儲藏（ 10～12℃）後，還原糖含量低可製成洋芋片，薯片金黃色、薯味濃郁且 褐化比例低，具優良加工潛力；此外，在鮮食亦具有濃郁香味，也可兼用於烹 煮等多元應用。",
+                      "size": "sm",
+                      "flex": 6,
+                      "wrap": true,
+                      "contents": []
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "footer": {
+          "type": "box",
+          "layout": "vertical",
+          "contents": [
+            {
+              "type": "separator"
+            },
+            {
+              "type": "button",
+              "action": {
+                "type": "postback",
+                "label": "返回 品種介紹導覽",
+                "text": "品種介紹",
+                "data": "variety_introduction"
+              }
+            },
+            {
+              "type": "button",
+              "action": {
+                "type": "postback",
+                "label": "切換到 瑕疵導覽",
+                "text": "瑕疵導覽",
+                "data": "defect_introduction"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "type": "bubble",
+        "header": {
+          "type": "box",
+          "layout": "horizontal",
+          "contents": [
+            {
+              "type": "text",
+              "text": "馬鈴薯品種介紹",
+              "weight": "bold",
+              "size": "sm",
+              "color": "#AAAAAA",
+              "contents": []
+            }
+          ]
+        },
+        "hero": {
+          "type": "image",
+          "url": "https://storage.googleapis.com/louisai/LineBot/大利.png",
+          "size": "full",
+          "aspectRatio": "20:20",
+          "aspectMode": "cover",
+          "action": {
+            "type": "uri",
+            "label": "Action",
+            "uri": "https://linecorp.com/"
+          }
+        },
+        "body": {
+          "type": "box",
+          "layout": "vertical",
+          "spacing": "md",
+          "contents": [
+            {
+              "type": "box",
+              "layout": "vertical",
+              "contents": [
+                {
+                  "type": "text",
+                  "text": "大利",
+                  "weight": "bold",
+                  "size": "xl",
+                  "contents": []
+                }
+              ]
+            },
+            {
+              "type": "box",
+              "layout": "vertical",
+              "contents": [
+                {
+                  "type": "box",
+                  "layout": "baseline",
+                  "contents": [
+                    {
+                      "type": "text",
+                      "text": "特色",
+                      "weight": "bold",
+                      "color": "#1683EBFF",
+                      "flex": 2,
+                      "contents": []
+                    },
+                    {
+                      "type": "text",
+                      "text": "薯球橢圓形、薯皮淺黃色皮、薯肉淺黃色、芽體粉色、芽眼深度中等。 晚生、無性繁殖品種。 株型直立，株冠大而緊密，莖綠色，花白色，開花多。 具加工與鮮食兼用特色。",
+                      "size": "sm",
+                      "flex": 6,
+                      "wrap": true,
+                      "contents": []
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "footer": {
+          "type": "box",
+          "layout": "vertical",
+          "contents": [
+            {
+              "type": "separator"
+            },
+            {
+              "type": "button",
+              "action": {
+                "type": "postback",
+                "label": "返回 品種介紹導覽",
+                "text": "品種介紹",
+                "data": "variety_introduction"
+              }
+            },
+            {
+              "type": "button",
+              "action": {
+                "type": "postback",
+                "label": "切換到 瑕疵導覽",
+                "text": "瑕疵導覽",
+                "data": "defect_introduction"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "type": "bubble",
+        "header": {
+          "type": "box",
+          "layout": "horizontal",
+          "contents": [
+            {
+              "type": "text",
+              "text": "馬鈴薯品種介紹",
+              "weight": "bold",
+              "size": "sm",
+              "color": "#AAAAAA",
+              "contents": []
+            }
+          ]
+        },
+        "hero": {
+          "type": "image",
+          "url": "https://storage.googleapis.com/louisai/LineBot/大西洋.jpg",
+          "size": "full",
+          "aspectRatio": "20:13",
+          "aspectMode": "cover",
+          "action": {
+            "type": "uri",
+            "label": "Action",
+            "uri": "https://linecorp.com/"
+          }
+        },
+        "body": {
+          "type": "box",
+          "layout": "vertical",
+          "spacing": "md",
+          "contents": [
+            {
+              "type": "box",
+              "layout": "vertical",
+              "contents": [
+                {
+                  "type": "text",
+                  "text": "大西洋",
+                  "weight": "bold",
+                  "size": "xl",
+                  "contents": []
+                }
+              ]
+            },
+            {
+              "type": "box",
+              "layout": "vertical",
+              "contents": [
+                {
+                  "type": "box",
+                  "layout": "baseline",
+                  "contents": [
+                    {
+                      "type": "text",
+                      "text": "特色",
+                      "weight": "bold",
+                      "color": "#1683EBFF",
+                      "flex": 2,
+                      "contents": []
+                    },
+                    {
+                      "type": "text",
+                      "text": "薯型渾圓、外皮土黃色、薯肉白色、芽眼深。 市場上較少見，多為契作用以加工成洋芋片。",
+                      "size": "sm",
+                      "flex": 5,
+                      "wrap": true,
+                      "contents": []
+                    }
+                  ]
+                },
+                {
+                  "type": "box",
+                  "layout": "baseline",
+                  "contents": [
+                    {
+                      "type": "text",
+                      "text": "適合料理",
+                      "weight": "bold",
+                      "color": "#1683EBFF",
+                      "flex": 2,
+                      "contents": []
+                    },
+                    {
+                      "type": "text",
+                      "text": "炸洋芋片等食品加工。",
+                      "size": "sm",
+                      "flex": 5,
+                      "wrap": true,
+                      "contents": []
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "footer": {
+          "type": "box",
+          "layout": "vertical",
+          "contents": [
+            {
+              "type": "separator"
+            },
+            {
+              "type": "button",
+              "action": {
+                "type": "postback",
+                "label": "返回 品種介紹導覽",
+                "text": "品種介紹",
+                "data": "variety_introduction"
+              }
+            },
+            {
+              "type": "button",
+              "action": {
+                "type": "postback",
+                "label": "切換到 瑕疵導覽",
+                "text": "瑕疵導覽",
+                "data": "defect_introduction"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "type": "bubble",
+        "header": {
+          "type": "box",
+          "layout": "horizontal",
+          "contents": [
+            {
+              "type": "text",
+              "text": "馬鈴薯品種介紹",
+              "weight": "bold",
+              "size": "sm",
+              "color": "#AAAAAA",
+              "contents": []
+            }
+          ]
+        },
+        "hero": {
+          "type": "image",
+          "url": "https://storage.googleapis.com/louisai/LineBot/紅皮馬玲薯.jpg",
+          "size": "full",
+          "aspectRatio": "20:14",
+          "aspectMode": "cover",
+          "action": {
+            "type": "uri",
+            "label": "Action",
+            "uri": "https://linecorp.com/"
+          }
+        },
+        "body": {
+          "type": "box",
+          "layout": "vertical",
+          "spacing": "md",
+          "contents": [
+            {
+              "type": "box",
+              "layout": "vertical",
+              "contents": [
+                {
+                  "type": "text",
+                  "text": "紅皮馬鈴薯",
+                  "weight": "bold",
+                  "size": "xl",
+                  "contents": []
+                },
+                {
+                  "type": "text",
+                  "text": "Red Potatoes",
+                  "weight": "bold",
+                  "size": "lg",
+                  "contents": []
+                }
+              ]
+            },
+            {
+              "type": "box",
+              "layout": "vertical",
+              "contents": [
+                {
+                  "type": "box",
+                  "layout": "baseline",
+                  "contents": [
+                    {
+                      "type": "text",
+                      "text": "特色",
+                      "weight": "bold",
+                      "color": "#1683EBFF",
+                      "flex": 2,
+                      "contents": []
+                    },
+                    {
+                      "type": "text",
+                      "text": "中小型的馬鈴薯，薯球呈圓形或橢圓形，平滑的紅色薄皮包覆著白色果肉。 紅皮馬鈴薯的口感滑順、富含水分且綿密。帶著微微甜味，糖分含量中等。",
+                      "size": "sm",
+                      "flex": 5,
+                      "wrap": true,
+                      "contents": []
+                    }
+                  ]
+                },
+                {
+                  "type": "box",
+                  "layout": "baseline",
+                  "contents": [
+                    {
+                      "type": "text",
+                      "text": "適合料理",
+                      "weight": "bold",
+                      "color": "#1683EBFF",
+                      "flex": 2,
+                      "contents": []
+                    },
+                    {
+                      "type": "text",
+                      "text": "紅皮馬鈴薯常常被用在沙拉、披薩、湯品、燉品或作成炙烤馬鈴薯或馬鈴薯泥。",
+                      "size": "sm",
+                      "flex": 5,
+                      "wrap": true,
+                      "contents": []
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "footer": {
+          "type": "box",
+          "layout": "vertical",
+          "contents": [
+            {
+              "type": "separator"
+            },
+            {
+              "type": "button",
+              "action": {
+                "type": "postback",
+                "label": "返回 品種介紹導覽",
+                "text": "品種介紹",
+                "data": "variety_introduction"
+              }
+            },
+            {
+              "type": "button",
+              "action": {
+                "type": "postback",
+                "label": "切換到 瑕疵導覽",
+                "text": "瑕疵導覽",
+                "data": "defect_introduction"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "type": "bubble",
+        "header": {
+          "type": "box",
+          "layout": "horizontal",
+          "contents": [
+            {
+              "type": "text",
+              "text": "馬鈴薯品種介紹",
+              "weight": "bold",
+              "size": "sm",
+              "color": "#AAAAAA",
+              "contents": []
+            }
+          ]
+        },
+        "hero": {
+          "type": "image",
+          "url": "https://storage.googleapis.com/louisai/LineBot/褐皮馬鈴薯.jpg",
+          "size": "full",
+          "aspectRatio": "20:14",
+          "aspectMode": "cover",
+          "action": {
+            "type": "uri",
+            "label": "Action",
+            "uri": "https://linecorp.com/"
+          }
+        },
+        "body": {
+          "type": "box",
+          "layout": "vertical",
+          "spacing": "md",
+          "contents": [
+            {
+              "type": "box",
+              "layout": "vertical",
+              "contents": [
+                {
+                  "type": "text",
+                  "text": "褐皮馬鈴薯",
+                  "weight": "bold",
+                  "size": "xl",
+                  "contents": []
+                },
+                {
+                  "type": "text",
+                  "text": "U.S. Russet Potatoes",
+                  "weight": "bold",
+                  "size": "lg",
+                  "contents": []
+                }
+              ]
+            },
+            {
+              "type": "box",
+              "layout": "vertical",
+              "contents": [
+                {
+                  "type": "box",
+                  "layout": "baseline",
+                  "contents": [
+                    {
+                      "type": "text",
+                      "text": "特色",
+                      "weight": "bold",
+                      "color": "#1683EBFF",
+                      "flex": 2,
+                      "contents": []
+                    },
+                    {
+                      "type": "text",
+                      "text": "中大型馬鈴薯，薯球呈現橢圓形或略扁橢圓形。 淡到中度棕褐色的網狀表皮，白色到淺黃色的果肉。 質地呈現粉狀、偏乾、質輕而蓬鬆，營養豐富的馬鈴薯外皮在煮熟後也較有嚼勁。 有淡淡大地香味，糖分含量中等。",
+                      "size": "sm",
+                      "flex": 5,
+                      "wrap": true,
+                      "contents": []
+                    }
+                  ]
+                },
+                {
+                  "type": "box",
+                  "layout": "baseline",
+                  "contents": [
+                    {
+                      "type": "text",
+                      "text": "適合料理",
+                      "weight": "bold",
+                      "color": "#1683EBFF",
+                      "flex": 2,
+                      "contents": []
+                    },
+                    {
+                      "type": "text",
+                      "text": "清爽蓬鬆的馬鈴薯泥。",
+                      "size": "sm",
+                      "flex": 5,
+                      "wrap": true,
+                      "contents": []
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "footer": {
+          "type": "box",
+          "layout": "vertical",
+          "contents": [
+            {
+              "type": "separator"
+            },
+            {
+              "type": "button",
+              "action": {
+                "type": "postback",
+                "label": "返回 品種介紹導覽",
+                "text": "品種介紹",
+                "data": "variety_introduction"
+              }
+            },
+            {
+              "type": "button",
+              "action": {
+                "type": "postback",
+                "label": "切換到 瑕疵導覽",
+                "text": "瑕疵導覽",
+                "data": "defect_introduction"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "type": "bubble",
+        "header": {
+          "type": "box",
+          "layout": "horizontal",
+          "contents": [
+            {
+              "type": "text",
+              "text": "馬鈴薯品種介紹",
+              "weight": "bold",
+              "size": "sm",
+              "color": "#AAAAAA",
+              "contents": []
+            }
+          ]
+        },
+        "hero": {
+          "type": "image",
+          "url": "https://storage.googleapis.com/louisai/LineBot/彩色馬鈴薯.jpg",
+          "size": "full",
+          "aspectRatio": "20:13",
+          "aspectMode": "cover",
+          "action": {
+            "type": "uri",
+            "label": "Action",
+            "uri": "https://linecorp.com/"
+          }
+        },
+        "body": {
+          "type": "box",
+          "layout": "vertical",
+          "spacing": "md",
+          "contents": [
+            {
+              "type": "box",
+              "layout": "vertical",
+              "contents": [
+                {
+                  "type": "text",
+                  "text": "彩色馬鈴薯",
+                  "weight": "bold",
+                  "size": "xl",
+                  "contents": []
+                },
+                {
+                  "type": "text",
+                  "text": "進口、台灣種植均有",
+                  "size": "md",
+                  "contents": []
+                }
+              ]
+            },
+            {
+              "type": "box",
+              "layout": "vertical",
+              "contents": [
+                {
+                  "type": "box",
+                  "layout": "baseline",
+                  "contents": [
+                    {
+                      "type": "text",
+                      "text": "特色",
+                      "weight": "bold",
+                      "color": "#1683EBFF",
+                      "flex": 2,
+                      "contents": []
+                    },
+                    {
+                      "type": "text",
+                      "text": "皮薄，有不同顏色。　紅色又稱玫瑰洋芋、粉紅洋芋、紅皮洋芋。 白色又稱手指洋芋、新洋芋。 紫色的則是紫色洋芋。",
+                      "size": "sm",
+                      "flex": 5,
+                      "wrap": true,
+                      "contents": []
+                    }
+                  ]
+                },
+                {
+                  "type": "box",
+                  "layout": "baseline",
+                  "contents": [
+                    {
+                      "type": "text",
+                      "text": "質地",
+                      "weight": "bold",
+                      "color": "#1683EBFF",
+                      "flex": 2,
+                      "contents": []
+                    },
+                    {
+                      "type": "text",
+                      "text": "蠟質",
+                      "size": "sm",
+                      "flex": 5,
+                      "contents": []
+                    }
+                  ]
+                },
+                {
+                  "type": "box",
+                  "layout": "baseline",
+                  "contents": [
+                    {
+                      "type": "text",
+                      "text": "適合料理",
+                      "weight": "bold",
+                      "color": "#1683EBFF",
+                      "flex": 2,
+                      "wrap": true,
+                      "contents": []
+                    },
+                    {
+                      "type": "text",
+                      "text": "烤馬鈴薯、炸洋芋片(可以有彩色效果)。",
+                      "size": "sm",
+                      "flex": 5,
+                      "wrap": true,
+                      "contents": []
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "footer": {
+          "type": "box",
+          "layout": "vertical",
+          "contents": [
+            {
+              "type": "separator"
+            },
+            {
+              "type": "button",
+              "action": {
+                "type": "postback",
+                "label": "返回 品種介紹導覽",
+                "text": "品種介紹",
+                "data": "variety_introduction"
+              }
+            },
+            {
+              "type": "button",
+              "action": {
+                "type": "postback",
+                "label": "切換到 瑕疵導覽",
+                "text": "瑕疵導覽",
+                "data": "defect_introduction"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "type": "bubble",
+        "header": {
+          "type": "box",
+          "layout": "horizontal",
+          "contents": [
+            {
+              "type": "text",
+              "text": "馬鈴薯品種介紹",
+              "weight": "bold",
+              "size": "sm",
+              "color": "#AAAAAA",
+              "contents": []
+            }
+          ]
+        },
+        "hero": {
+          "type": "image",
+          "url": "https://storage.googleapis.com/louisai/LineBot/白玉馬鈴薯.JPG",
+          "size": "full",
+          "aspectRatio": "20:14",
+          "aspectMode": "cover",
+          "action": {
+            "type": "uri",
+            "label": "Action",
+            "uri": "https://linecorp.com/"
+          }
+        },
+        "body": {
+          "type": "box",
+          "layout": "vertical",
+          "spacing": "md",
+          "contents": [
+            {
+              "type": "box",
+              "layout": "vertical",
+              "contents": [
+                {
+                  "type": "text",
+                  "text": "白玉馬鈴薯",
+                  "weight": "bold",
+                  "size": "xl",
+                  "contents": []
+                }
+              ]
+            },
+            {
+              "type": "box",
+              "layout": "vertical",
+              "contents": [
+                {
+                  "type": "box",
+                  "layout": "baseline",
+                  "contents": [
+                    {
+                      "type": "text",
+                      "text": "特色",
+                      "weight": "bold",
+                      "color": "#1683EBFF",
+                      "flex": 2,
+                      "contents": []
+                    },
+                    {
+                      "type": "text",
+                      "text": "白皮馬鈴薯含水量較多，口味細緻，且獨特奶油香氣。 耐烹煮，即使烹煮，也不易變形。",
+                      "size": "sm",
+                      "flex": 5,
+                      "wrap": true,
+                      "contents": []
+                    }
+                  ]
+                },
+                {
+                  "type": "box",
+                  "layout": "baseline",
+                  "contents": [
+                    {
+                      "type": "text",
+                      "text": "適合料理",
+                      "weight": "bold",
+                      "color": "#1683EBFF",
+                      "flex": 2,
+                      "contents": []
+                    },
+                    {
+                      "type": "text",
+                      "text": "適合多種烹調方式，油炸、煎炸、清蒸、焗烤、燉煮。",
+                      "size": "sm",
+                      "flex": 5,
+                      "wrap": true,
+                      "contents": []
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "footer": {
+          "type": "box",
+          "layout": "vertical",
+          "contents": [
+            {
+              "type": "separator"
+            },
+            {
+              "type": "button",
+              "action": {
+                "type": "postback",
+                "label": "返回 品種介紹導覽",
+                "text": "品種介紹",
+                "data": "variety_introduction"
+              }
+            },
+            {
+              "type": "button",
+              "action": {
+                "type": "postback",
+                "label": "切換到 瑕疵導覽",
+                "text": "瑕疵導覽",
+                "data": "defect_introduction"
+              }
+            }
+          ]
+        }
+      }
+]

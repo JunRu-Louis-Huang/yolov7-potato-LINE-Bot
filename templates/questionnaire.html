@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>用戶基本資料</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <div class="row" style="margin: 10px">
+        <div class="col-12" style="margin: 10px">
+ 
+                <div>           
+                    <label for="email"><b>電子郵件: </b><abbr title="required" aria-label="required">*</abbr></label>
+                    <input id="email" type="email" name="email" required><br />
+                </div> 
+
+                <br>
+                <div>  
+                    <label for="birthday"><b>您的出生日期: </b><abbr title="required" aria-label="required">*</abbr></label>
+                    <input type="date" id="birthday" value="" class="form-control" required/><br />
+                </div>
+                <br> 
+                <div>  
+                    <label for="gender"><b>性別:</b> <abbr title="required" aria-label="required">*</abbr></label>
+                    <input type="radio" id="gender" name="gender" value="M">男
+                    <input type="radio" id="gender" name="gender" value="F" required>女<br />
+                </div>
+                <br> 
+                <div>
+                    <label><b>平常選購馬鈴薯地點（可複選）：</b></label><br>
+                    <input type="checkbox" name="place_of_purchase" value="market" id="market">
+                    <label for="market">市場</label> <br>
+                    <input type="checkbox" name="place_of_purchase" value="supermarket" id="supermarket">
+                    <label for="supermarket">超市</label> <br>
+                    <input type="checkbox" name="place_of_purchase" value="peasant_association" id="peasant_association">
+                    <label for="peasant_association">農會</label> <br>
+                    <input type="checkbox" name="place_of_purchase" value="online" id="online">
+                    <label for="online">網購</label> <br>
+                    <input type="checkbox" name="place_of_purchase" value="other" id="other">
+                    <label for="other">其他:</label>
+                    <input type="text" id="place_of_purchase1"  name="place_of_purchase" placeholder="例: 市集">
+                    
+                </div>
+                <br>
+                <div>
+                    <label><b>選購馬鈴薯時最常見瑕疵（可複選）：</b></label><br>
+                    <input type="checkbox" name="defect_type" value="sprout" id="sprout">
+                    <label for="sprout">發芽（sprout）</label> <br>
+                    <input type="checkbox" name="defect_type" value="green" id="green">
+                    <label for="green">發綠（green）</label> <br>
+                    <input type="checkbox" name="defect_type" value="scab" id="scab">
+                    <label for="scab">瘡痂病（scab）</label> <br>
+                    <input type="checkbox" name="defect_type" value="black" id="black">
+                    <label for="black">發黑（black）</label> <br>
+                    <input type="checkbox" name="defect_type" value="hole" id="hole">
+                    <label for="hole">凹洞（hole）</label> <br>
+                    <input type="checkbox" name="defect_type" value="deformation" id="deformation">
+                    <label for="deformation">外型不規則（deformation）</label> <br>
+                    <input type="checkbox" name="defect_type" value="mold" id="mold">
+                    <label for="mold">白絹病（mold）</label> <br />
+                </div>
+                <br>
+            <button class="btn btn-success btn-block" id="btn_reserve" type="submit" value="送出表單">確定</button>
+
+        </div>
+    </div>
+    <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+	<script>
+        function initializeLiff(myLiffId) {
+            liff.init({liffId: myLiffId });
+        }
+
+        function reserve(email, birthday, gender, place_of_purchase, other, defect_type) {
+            if (email == '' || birthday == '' || gender == '' || place_of_purchase == '' || defect_type == '') {  //資料檢查
+                alert('請檢查 還有欄位尚未填寫唷！');
+                return;
+            }
+            var msg = "###";  //回傳訊息字串
+            msg = msg + email + "/";
+            msg = msg + birthday + "/";
+            msg = msg + gender + "/";
+            msg = msg + place_of_purchase +"-"+ other + "/";
+            msg = msg + defect_type + "/";
+			liff.sendMessages([  //推播訊息
+				{ type: 'text',
+				  text: msg
+				}
+			])
+				.then(() => {
+					liff.closeWindow();  //關閉視窗
+				});
+		}
+
+
+        var place_of_purchase = "";
+        $("input[name='place_of_purchase']").each(function(){
+            place_of_purchase += $(this).val()+",";
+        });
+        var defect_type = "";
+        $("input[name='defect_type']").each(function(){
+            defect_type += $(this).val()+",";
+        });
+
+		$(document).ready(function () {
+			initializeLiff('{{ liffid }}');
+            $('#btn_reserve').click(function (e) {  //按下確定鈕
+                reserve($('#email').val(), $('#birthday').val(), $('#gender').val(), $('input:checkbox:checked[name="place_of_purchase"]').map(function() { return $(this).val(); }).get(), $("#place_of_purchase1").val(), $('input:checkbox:checked[name="defect_type"]').map(function() { return $(this).val(); }).get());
+            });
+		});
+	</script>
+</body>
+</html>

@@ -9,7 +9,7 @@ from line_bot_api import *
 import cv2
 import numpy as np
 import torch
-from PIL import Image
+from PIL import Image, ImageDraw, ImageFont
 
 from models.experimental import attempt_load
 from utils.general import non_max_suppression
@@ -43,16 +43,6 @@ def detect_event(event):
         TextSendMessage(text="好的，您可以使用相機拍照，或者上傳照片", quick_reply=quick_reply)
     )
 
-# 下載APP
-def download_RealTime(event):
-    f = open("./events/downloadAPP.json", "r", encoding="utf-8")
-    contents_json = json.load(f)  # 載入自製的 FlexSendMessage 的 JSON 
-    flex_message = FlexSendMessage(alt_text='下載APP', contents=contents_json)
-    f.close()
-    line_bot_api.reply_message(
-            event.reply_token,
-            flex_message)
-
 # 馬鈴薯小學堂
 def introduction(event):
     template_message = TemplateSendMessage(
@@ -71,6 +61,37 @@ def introduction(event):
                         label='品種介紹',  #按鈕文字
                         text='品種介紹',  #顯示文字訊息
                         data='variety_introduction'  #Postback資料
+                    )
+                ]
+            )
+    
+    )
+    line_bot_api.reply_message(
+            event.reply_token,
+            template_message)
+
+def more_(event):
+    template_message = TemplateSendMessage(
+        alt_text='說明資訊',
+        template=ButtonsTemplate(
+                title='🥔說明   📰關於',
+                text='歡迎點下方擊連結填寫問卷，幫助我們做得更好',
+                actions=[
+                    PostbackTemplateAction(  #執行Postback功能,觸發Postback事件
+                        label='使用說明',  #按鈕文字
+                        data='Manual'  #Postback資料
+                    ),
+                    PostbackTemplateAction(  #執行Postback功能,觸發Postback事件
+                        label='關於我們',  #按鈕文字
+                        data='About'  #Postback資料
+                    ),
+                    MessageTemplateAction(  #文字按鈕
+                        label='看 我是誰',  #按鈕文字
+                        text='@我是誰'
+                    ),
+                    URITemplateAction(  #開啟網頁
+                        label='回饋問卷(可重複填寫)',
+                        uri='https://liff.line.me/' + liffid
                     )
                 ]
             )
@@ -143,13 +164,13 @@ def yolo_predict_text_save(event, image_size=640):
     
     for x1, y1, x2, y2, conf, class_id in pred:
         # if conf >= 0.4:
-        text = f"{CLASSES[int(class_id)]}  {conf:.2f}"
+        text = f"{CLASSES_zh[int(class_id)]}  {conf:.2f}"
         # print(x1, y1, x2,  y2, conf, class_id) 
         x1, y1, x2, y2 = int(x1), int(y1), int(x2), int(y2)
         # print(x1, y1, x2, y2)
         cv2.rectangle(image, (x1, y1), (x2, y2), (0, 255, 0), 4)
         cv2.putText(image, text, (x1, y1), 2, 1, (30,250,255), 2)
-        # print(f"{CLASSES[int(class_id)]}  {conf:.2f}")
+        # print(f"{CLASSES_zh[int(class_id)]}  {conf:.2f}")
         if int(class_id) == 0:
             # coordinate = (x1, y1, x2, y2)
             # potato_range_list.append(coordinate)
@@ -227,13 +248,13 @@ def yolo_predict_photo_save(event, image_size=640):
     
     for x1, y1, x2, y2, conf, class_id in pred:
         # if conf >= 0.4:
-        text = f"{CLASSES[int(class_id)]}  {conf:.2f}"
+        text = f"{CLASSES_zh[int(class_id)]}  {conf:.2f}"
         # print(x1, y1, x2,  y2, conf, class_id) 
         x1, y1, x2, y2 = int(x1), int(y1), int(x2), int(y2)
         # print(x1, y1, x2, y2)
         cv2.rectangle(image, (x1, y1), (x2, y2), (0, 255, 0), 4)
         cv2.putText(image, text, (x1, y1), 2, 1, (30,250,255), 2)
-        # print(f"{CLASSES[int(class_id)]}  {conf:.2f}")
+        # print(f"{CLASSES_zh[int(class_id)]}  {conf:.2f}")
         if int(class_id) == 0:
             # coordinate = (x1, y1, x2, y2)
             # potato_range_list.append(coordinate)
@@ -336,38 +357,70 @@ def yolo_predict_photoText(event, image_size=640):
     ## Visualize the result 直接從記憶體取得照片
     npimg = np.fromstring(b, np.uint8)
     image = cv2.imdecode(npimg, cv2.IMREAD_COLOR)  # queryImage
+    
     result_text = "影像偵測到可能有：\n"
     i = 1
     pred_list = []  
     # potato_range_list = []
     # print(pred)
     
-    for x1, y1, x2, y2, conf, class_id in pred:
-        # if conf >= 0.4:
-        text = f"{CLASSES[int(class_id)]}  {conf:.2f}"
-        # print(x1, y1, x2,  y2, conf, class_id) 
-        x1, y1, x2, y2 = int(x1), int(y1), int(x2), int(y2)
-        # print(x1, y1, x2, y2)
-        cv2.rectangle(image, (x1, y1), (x2, y2), (0, 255, 0), 4)
-        cv2.putText(image, text, (x1, y1), 2, 1, (30,250,255), 2)
-        # print(f"{CLASSES[int(class_id)]}  {conf:.2f}")
-        if int(class_id) == 0:
-            # coordinate = (x1, y1, x2, y2)
-            # potato_range_list.append(coordinate)
-            pred_list.append(int(class_id))
+    for cls_index in range(pred.shape[0]):
+        if pred[cls_index][-1] == 0 and pred[cls_index][-2] >= 0.8: 
 
-        else:
-            # for j in potato_range_list:
-            #     if ((j[0] <= x1 <= j[2]) and (j[1] <= y1 <= j[3])) or ((j[0] <= x2 <= j[2]) and (j[1] <= y2 <= j[3])) or ((j[0] <= x1 <= j[2]) and (j[1] <= y2 <= j[3])) or ((j[0] <= x2 <= j[2]) and (j[1] <= y1 <= j[3])):
+            for x1, y1, x2, y2, conf, class_id in pred:
+                # if conf >= 0.4:
+                if int(class_id) == 0 and conf >= 0.8:
+                    text = f"{CLASSES_zh[int(class_id)]}  {conf:.2f}"
+                    # print(x1, y1, x2,  y2, conf, class_id) 
+                    x1, y1, x2, y2 = int(x1), int(y1), int(x2), int(y2)
+                    # print(x1, y1, x2, y2)
+                    cv2.rectangle(image, (x1, y1), (x2, y2), (0, 255, 0), 4)
+
+                    # 更新:添加中文字
+                    # OpenCV圖片轉換為PIL圖片格式，使用PIL繪製文字
+                    image = Image.fromarray(image[..., ::-1])
+                    draw = ImageDraw.Draw(image)
+                    fontText = ImageFont.truetype("NotoSansTC-Regular.otf", size=45, encoding="utf-8")
+                    draw.text((x1, y1-60), text, fill=(255, 0, 255), font=fontText)
+                    image = cv2.cvtColor(np.asarray(image), cv2.COLOR_RGB2BGR)    # PIL圖片格式轉換成OpenCV的圖片格式
+                    # cv2.putText(image, text, (x1, y1), 2, 1, (30,250,255), 2)
+
+                    # print(f"{CLASSES_zh[int(class_id)]}  {conf:.2f}")
+                    # coordinate = (x1, y1, x2, y2)
+                    # potato_range_list.append(coordinate)
+                    pred_list.append(int(class_id))
+                elif int(class_id) != 0 and conf > 0.3:
+                    text = f"{CLASSES[int(class_id)]}  {conf:.2f}"
+                    # print(x1, y1, x2,  y2, conf, class_id) 
+                    x1, y1, x2, y2 = int(x1), int(y1), int(x2), int(y2)
+                    # print(x1, y1, x2, y2)
+                    cv2.rectangle(image, (x1, y1), (x2, y2), (0, 255, 0), 4)
+
+                    # 更新:添加中文字
+                    # OpenCV圖片轉換為PIL圖片格式，使用PIL繪製文字
+                    image = Image.fromarray(image[..., ::-1])
+                    draw = ImageDraw.Draw(image)
+                    fontText = ImageFont.truetype("NotoSansTC-Regular.otf", size=45, encoding="utf-8")
+                    draw.text((x1, y1-60), text, fill=(255, 0, 255), font=fontText)
+                    image = cv2.cvtColor(np.asarray(image), cv2.COLOR_RGB2BGR)    # PIL圖片格式轉換成OpenCV的圖片格式
+                    
+                    # cv2.putText(image, text, (x1, y1), 2, 1, (30,250,255), 2)
+                    # print(f"{CLASSES[int(class_id)]}  {conf:.2f}")
+    
+                    # coordinate = (x1, y1, x2, y2)
+                    # potato_range_list.append(coordinate)
                     pred_list.append(int(class_id))
                     result_text += f"{i}. {CLASSES_zh[int(class_id)]}  (Conf: {conf:.2f})\n"
-                    i += 1           
+                    i += 1
+            break
+    
     # if not os.path.exists("./static"):
     #     os.mkdir("./static")
     # pred_img_file = f"./static/{message_id}.{message_content.content_type.split('/')[1].lower()}"
     # cv2.imwrite(pred_img_file, image)
     # print("YOLO Image was saved")
 
+    
     img_encode = cv2.imencode('.jpeg', image)[1]
 
     # Converting the image into numpy array
@@ -377,25 +430,32 @@ def yolo_predict_photoText(event, image_size=640):
     pred_imgName_to_GCS = f"images/yolo_predImg/{message_id}.{message_content.content_type.split('/')[1].lower()}"
     upload_blob_from_memory(bucket_name, byte_encode, pred_imgName_to_GCS)
 
-    if {0} == set(pred_list):
-        text="辨識完成，AI目前沒有偵測到瑕疵"
-    elif {0} <= set(pred_list):
-        text=result_text
-    elif 0 not in pred_list:
-        text="沒有偵測到馬鈴薯，請重新拍照"
-
     send_img = ImageSendMessage(  #傳送圖片
                         # original_content_url = f"{end_point}{pred_img_file[1:]}",
                         # preview_image_url = f"{end_point}{pred_img_file[1:]}"
                          original_content_url = f"https://storage.googleapis.com/{bucket_name}/images/yolo_predImg/{message_id}.{message_content.content_type.split('/')[1].lower()}",
                          preview_image_url = f"https://storage.googleapis.com/{bucket_name}/images/yolo_predImg/{message_id}.{message_content.content_type.split('/')[1].lower()}"
                     )
+    situation = "0"
+    if {0} == set(pred_list):
+        text="辨識完成，AI目前沒有偵測到瑕疵"
+    elif {0} <= set(pred_list):
+        text=result_text
+    elif 0 not in pred_list:
+        text="沒有偵測到馬鈴薯，請重新拍照"
+        situation = "1"
+
     send_pred_text = TextSendMessage(text=text)
-    message = [
-            send_img,
-            send_pred_text,
-            ]
-    line_bot_api.reply_message(event.reply_token, message)
+    
+    if situation == "0":
+        message = [
+                send_img,
+                send_pred_text,
+                ]
+    else:
+        message = send_pred_text
+    line_bot_api.reply_message(event.reply_token, message)    
+
 
     # update db
     potato = sprout = green = scab = black = hole = deformation = mold = 0
@@ -498,4 +558,5 @@ def get_group_members_count(event):
     group_count = line_bot_api.get_group_members_count(group_id)
     print(group_count)
     return group_count
+
 
