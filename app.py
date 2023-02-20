@@ -12,8 +12,6 @@ from events.basic import detect_event, save_img, yolo_predict_text_save, yolo_pr
      introduction, whoami, more_
 from events.postback_event import *
 
-# from PIL import Image
-# import cv2
 
 app = Flask(__name__)
 # 定義 SQL 連線字串
@@ -147,15 +145,6 @@ def handle_message(event):
         deformation=1 if "deformation" in defect_type else 0
         mold=1 if "mold" in defect_type else 0
 
-        # print(flist)
-        # print("userid: "+user_id)
-        # print("email: "+ email)
-        # print("birthday:"+ birthday)
-        # print("gender: "+ gender)
-        # print(place_of_purchase)
-        # print("market: "+str(market), "supermarket: "+ str(supermarket), "農會: "+ str(peasant_association), "網購: "+str(online), "其他: "+ str(other), other_2)
-        # print(defect_type)
-        # print()
         sql_cmd = f"""select `USER_ID` from potato.FEEDBACK where USER_ID= '{user_id}';"""
         query_data = db.engine.execute(sql_cmd)
         if len(list(query_data)) == 0:

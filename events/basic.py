@@ -53,7 +53,7 @@ def introduction(event):
                 text='了解更多馬鈴薯瑕疵介紹、品種介紹資訊......',
                 actions=[
                     PostbackTemplateAction(  #執行Postback功能,觸發Postback事件
-                        label='瑕疵',  #按鈕文字
+                        label='瑕疵導覽',  #按鈕文字
                         text='瑕疵導覽',  #顯示文字訊息
                         data='defect_introduction'  #Postback資料
                     ),
@@ -390,7 +390,7 @@ def yolo_predict_photoText(event, image_size=640):
                     # potato_range_list.append(coordinate)
                     pred_list.append(int(class_id))
                 elif int(class_id) != 0 and conf > 0.3:
-                    text = f"{CLASSES[int(class_id)]}  {conf:.2f}"
+                    text = f"{CLASSES_zh[int(class_id)]}  {conf:.2f}"
                     # print(x1, y1, x2,  y2, conf, class_id) 
                     x1, y1, x2, y2 = int(x1), int(y1), int(x2), int(y2)
                     # print(x1, y1, x2, y2)
@@ -491,13 +491,13 @@ def whoami(event):
     profile = line_bot_api.get_profile(user_id)    
     f = open("./events/whoami.json", "r", encoding="utf-8")
     contents_json = json.load(f)
-    contents_json["hero"]["url"]=profile.picture_url
-    contents_json["body"]["contents"][0]["contents"][0]["contents"][1]["text"] = profile.display_name
+    contents_json["hero"]["url"]=profile.picture_url if profile.picture_url else "https://storage.googleapis.com/louisai/LineBot/%E7%84%A1%E9%A0%AD%E5%83%8F.jfif"
+    contents_json["body"]["contents"][0]["contents"][0]["contents"][1]["text"] = profile.display_name if profile.display_name else "-"
     contents_json["body"]["contents"][0]["contents"][1]["contents"][1]["text"] = profile.user_id
     contents_json["body"]["contents"][0]["contents"][2]["contents"][1]["text"] = profile.status_message if profile.status_message else "-"
     contents_json["body"]["contents"][0]["contents"][3]["contents"][1]["text"] = profile.language
 
-    flex_message = FlexSendMessage(alt_text='下載APP', contents=contents_json)
+    flex_message = FlexSendMessage(alt_text='感謝您', contents=contents_json)
     f.close()
     
     line_bot_api.reply_message(
