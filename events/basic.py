@@ -16,7 +16,7 @@ from utils.general import non_max_suppression
 from events.gcs import *
 
 WEIGHTS = WEIGHTS
-DEVICE = "cuda"
+DEVICE = "cpu"
 IMAGE_SIZE = 640
 
 CLASSES = ['potato', 'sprout', 'green', 'scab', 'black', 'hole', 'deformation', 'mold']
