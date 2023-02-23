@@ -245,8 +245,8 @@ def manual(event):
     text1 = "本AI辨識結果具一定的準確度，但辨識結果可能受光線、背景等因素影響。\n提醒您，在選購、料理前仍要再檢查是否有發芽、發綠、發霉等瑕疵喔"
     text2 = "祝您使用愉快。 🙂\n使用後別忘了填寫問卷唷！❤"
     send_img = ImageSendMessage(  #傳送圖片
-                        original_content_url = "https://storage.googleapis.com/louisai/LineBot/%E6%AD%A5%E9%A9%9F%E6%95%99%E5%AD%B8.jpg",
-                        preview_image_url = "https://storage.googleapis.com/louisai/LineBot/%E6%AD%A5%E9%A9%9F%E6%95%99%E5%AD%B8.jpg"
+                        original_content_url = "https://storage.googleapis.com/louisai/LineBot/%E4%BD%BF%E7%94%A8%E8%AA%AA%E6%98%8Ev2.jpg",
+                        preview_image_url = "https://storage.googleapis.com/louisai/LineBot/%E4%BD%BF%E7%94%A8%E8%AA%AA%E6%98%8Ev2.jpg"
                     )
     send_img_2 = ImageSendMessage(  #傳送圖片
                         original_content_url = "https://storage.googleapis.com/louisai/LineBot/%E6%8B%8D%E6%94%9D%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A0%85.jpg",

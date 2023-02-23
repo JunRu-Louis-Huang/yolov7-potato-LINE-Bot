@@ -43,6 +43,7 @@ line-bot-sdk
 Flask
 flask-sqlalchemy
 sqlalchemy<2.0.0
+PyMySQL
 
 # Google Cloud Storage ------------------------
 google-cloud-storage

@@ -117,9 +117,9 @@ def handle_message(event):
             db.engine.execute(sql_cmd)
         except:
             line_bot_api.reply_message(event.reply_token,TextSendMessage(text='發生錯誤！'))
-    elif mtext[:3] == '###' and len(mtext) > 3:  #處理LIFF傳回的FORM資料
-        flist = mtext[3:].split('/')  #去除前三個「#」字元再分解字串
-        email = flist[0]  #取得輸入資料
+    elif mtext[:3] == '###' and len(mtext) > 3:  
+        flist = mtext[3:].split('/')  
+        email = flist[0]  
         birthday = flist[1]
         gender = flist[2]
         place_of_purchase = flist[3].split(',')

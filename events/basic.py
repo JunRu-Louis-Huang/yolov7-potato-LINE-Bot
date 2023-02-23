@@ -374,14 +374,14 @@ def yolo_predict_photoText(event, image_size=640):
                     # print(x1, y1, x2,  y2, conf, class_id) 
                     x1, y1, x2, y2 = int(x1), int(y1), int(x2), int(y2)
                     # print(x1, y1, x2, y2)
-                    cv2.rectangle(image, (x1, y1), (x2, y2), (0, 255, 0), 4)
+                    cv2.rectangle(image, (x1, y1), (x2, y2), (84,193,255), 4)
 
                     # 更新:添加中文字
                     # OpenCV圖片轉換為PIL圖片格式，使用PIL繪製文字
                     image = Image.fromarray(image[..., ::-1])
                     draw = ImageDraw.Draw(image)
-                    fontText = ImageFont.truetype("NotoSansTC-Regular.otf", size=45, encoding="utf-8")
-                    draw.text((x1, y1-60), text, fill=(255, 0, 255), font=fontText)
+                    fontText = ImageFont.truetype("NotoSansTC-Regular.otf", size=50, encoding="utf-8")
+                    draw.text((x1, y1-60), text, fill=(255,193,84), font=fontText)
                     image = cv2.cvtColor(np.asarray(image), cv2.COLOR_RGB2BGR)    # PIL圖片格式轉換成OpenCV的圖片格式
                     # cv2.putText(image, text, (x1, y1), 2, 1, (30,250,255), 2)
 
@@ -394,14 +394,41 @@ def yolo_predict_photoText(event, image_size=640):
                     # print(x1, y1, x2,  y2, conf, class_id) 
                     x1, y1, x2, y2 = int(x1), int(y1), int(x2), int(y2)
                     # print(x1, y1, x2, y2)
-                    cv2.rectangle(image, (x1, y1), (x2, y2), (0, 255, 0), 4)
+                    if int(class_id) == 1:
+                        cv2.rectangle(image, (x1, y1), (x2, y2), (238,100,204), 6)
+                    elif int(class_id) == 2:
+                        cv2.rectangle(image, (x1, y1), (x2, y2), (34,221,179), 6)
+                    elif int(class_id) == 3:
+                        cv2.rectangle(image, (x1, y1), (x2, y2), (145,115,205), 6)
+                    elif int(class_id) == 4:
+                        cv2.rectangle(image, (x1, y1), (x2, y2), (255,169,112), 6)
+                    elif int(class_id) == 5:
+                        cv2.rectangle(image, (x1, y1), (x2, y2), (206,94,99), 6)
+                    elif int(class_id) == 6:
+                        cv2.rectangle(image, (x1, y1), (x2, y2), (49,127,255), 6)
+                    elif int(class_id) == 7:
+                        cv2.rectangle(image, (x1, y1), (x2, y2), (214,210,87), 6)
 
                     # 更新:添加中文字
                     # OpenCV圖片轉換為PIL圖片格式，使用PIL繪製文字
                     image = Image.fromarray(image[..., ::-1])
                     draw = ImageDraw.Draw(image)
-                    fontText = ImageFont.truetype("NotoSansTC-Regular.otf", size=45, encoding="utf-8")
-                    draw.text((x1, y1-60), text, fill=(255, 0, 255), font=fontText)
+                    fontText = ImageFont.truetype("NotoSansTC-Regular.otf", size=50, encoding="utf-8")
+                    if int(class_id) == 1:
+                        draw.text((x1, y1-65), text, fill=(204,100,238), font=fontText)
+                    elif int(class_id) == 2:
+                        draw.text((x1, y1-65), text, fill=(210,255,0), font=fontText)
+                    elif int(class_id) == 3:
+                        draw.text((x1, y1-65), text, fill=(210,115,151), font=fontText)
+                    elif int(class_id) == 4:
+                        draw.text((x1, y1-65), text, fill=(158,197,255), font=fontText)
+                    elif int(class_id) == 5:
+                        draw.text((x1, y1-65), text, fill=(93,85,255), font=fontText)
+                    elif int(class_id) == 6:
+                        draw.text((x1, y1-65), text, fill=(255,127,49), font=fontText)
+                    elif int(class_id) == 7:
+                        draw.text((x1, y1-65), text, fill=(79,225,230), font=fontText)
+
                     image = cv2.cvtColor(np.asarray(image), cv2.COLOR_RGB2BGR)    # PIL圖片格式轉換成OpenCV的圖片格式
                     
                     # cv2.putText(image, text, (x1, y1), 2, 1, (30,250,255), 2)
