@@ -214,7 +214,7 @@ def cultivar_10(event):
 def cultivar_11(event):
     f = open("./events/cultivar.json", "r", encoding="utf-8")
     contents_json = json.load(f)
-    flex_message = FlexSendMessage(alt_text='你來到品種介紹-白玉馬鈴薯', contents=contents_json[11])
+    flex_message = FlexSendMessage(alt_text='你來到品種介紹-白玉馬鈴薯', contents=contents_json[12])
     f.close()
     line_bot_api.reply_message(
             event.reply_token,
@@ -224,7 +224,7 @@ def cultivar_11(event):
 def cultivar_12(event):
     f = open("./events/cultivar.json", "r", encoding="utf-8")
     contents_json = json.load(f)
-    flex_message = FlexSendMessage(alt_text='你來到品種介紹-彩色馬鈴薯', contents=contents_json[12])
+    flex_message = FlexSendMessage(alt_text='你來到品種介紹-彩色馬鈴薯', contents=contents_json[11])
     f.close()
     line_bot_api.reply_message(
             event.reply_token,

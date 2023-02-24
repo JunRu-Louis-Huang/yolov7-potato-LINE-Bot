@@ -20,12 +20,7 @@
       "url": "https://storage.googleapis.com/louisai/LineBot/potato-flat-lay-free-photo.jpg",
       "size": "full",
       "aspectRatio": "20:13",
-      "aspectMode": "cover",
-      "action": {
-        "type": "uri",
-        "label": "Action",
-        "uri": "https://linecorp.com/"
-      }
+      "aspectMode": "cover"
     },
     "body": {
       "type": "box",
@@ -157,11 +152,7 @@
       "url": "https://storage.googleapis.com/louisai/LineBot/%E7%99%BC%E8%8A%BD.jpg",
       "size": "full",
       "aspectRatio": "20:13",
-      "aspectMode": "cover",
-      "action": {
-        "type": "uri",
-        "uri": "http://linecorp.com/"
-      }
+      "aspectMode": "cover"
     },
     "body": {
       "type": "box",
@@ -287,11 +278,7 @@
       "url": "https://storage.googleapis.com/louisai/LineBot/%E7%99%BC%E7%B6%A0.jpg",
       "size": "full",
       "aspectRatio": "20:13",
-      "aspectMode": "cover",
-      "action": {
-        "type": "uri",
-        "uri": "http://linecorp.com/"
-      }
+      "aspectMode": "cover"
     },
     "body": {
       "type": "box",
@@ -429,11 +416,7 @@
       "url": "https://storage.googleapis.com/louisai/LineBot/%E7%98%A1%E7%97%821.jfif",
       "size": "full",
       "aspectRatio": "20:13",
-      "aspectMode": "cover",
-      "action": {
-        "type": "uri",
-        "uri": "http://linecorp.com/"
-      }
+      "aspectMode": "cover"
     },
     "body": {
       "type": "box",
@@ -565,11 +548,7 @@
       "url": "https://storage.googleapis.com/louisai/LineBot/%E7%99%BC%E9%BB%91.jpg",
       "size": "full",
       "aspectRatio": "20:13",
-      "aspectMode": "cover",
-      "action": {
-        "type": "uri",
-        "uri": "http://linecorp.com/"
-      }
+      "aspectMode": "cover"
     },
     "body": {
       "type": "box",
@@ -702,11 +681,7 @@
       "url": "https://storage.googleapis.com/louisai/LineBot/%E6%B4%9E.jpg",
       "size": "full",
       "aspectRatio": "20:13",
-      "aspectMode": "cover",
-      "action": {
-        "type": "uri",
-        "uri": "http://linecorp.com/"
-      }
+      "aspectMode": "cover"
     },
     "body": {
       "type": "box",
@@ -833,11 +808,7 @@
       "url": "https://storage.googleapis.com/louisai/LineBot/%E7%95%B8%E5%BD%A2.jpg",
       "size": "full",
       "aspectRatio": "20:13",
-      "aspectMode": "cover",
-      "action": {
-        "type": "uri",
-        "uri": "http://linecorp.com/"
-      }
+      "aspectMode": "cover"
     },
     "body": {
       "type": "box",
@@ -964,11 +935,7 @@
       "url": "https://storage.googleapis.com/louisai/LineBot/%E7%99%BD%E7%B5%B9%E7%97%852.jpg",
       "size": "full",
       "aspectRatio": "20:17",
-      "aspectMode": "cover",
-      "action": {
-        "type": "uri",
-        "uri": "http://linecorp.com/"
-      }
+      "aspectMode": "cover"
     },
     "body": {
       "type": "box",

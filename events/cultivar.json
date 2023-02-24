@@ -20,12 +20,7 @@
           "url": "https://storage.googleapis.com/louisai/LineBot/克尼伯.jpg",
           "size": "full",
           "aspectRatio": "20:13",
-          "aspectMode": "cover",
-          "action": {
-            "type": "uri",
-            "label": "Action",
-            "uri": "https://linecorp.com/"
-          }
+          "aspectMode": "cover"
         },
         "body": {
           "type": "box",
@@ -168,12 +163,7 @@
           "url": "https://storage.googleapis.com/louisai/LineBot/台農一號.jpg",
           "size": "full",
           "aspectRatio": "20:13",
-          "aspectMode": "cover",
-          "action": {
-            "type": "uri",
-            "label": "Action",
-            "uri": "https://linecorp.com/"
-          }
+          "aspectMode": "cover"
         },
         "body": {
           "type": "box",
@@ -316,12 +306,7 @@
           "url": "https://storage.googleapis.com/louisai/LineBot/台農三號.jpg",
           "size": "full",
           "aspectRatio": "20:16",
-          "aspectMode": "cover",
-          "action": {
-            "type": "uri",
-            "label": "Action",
-            "uri": "https://linecorp.com/"
-          }
+          "aspectMode": "cover"
         },
         "body": {
           "type": "box",
@@ -420,12 +405,7 @@
           "url": "https://storage.googleapis.com/louisai/LineBot/台農四號.jpg",
           "size": "full",
           "aspectRatio": "20:13",
-          "aspectMode": "cover",
-          "action": {
-            "type": "uri",
-            "label": "Action",
-            "uri": "https://linecorp.com/"
-          }
+          "aspectMode": "cover"
         },
         "body": {
           "type": "box",
@@ -547,12 +527,7 @@
           "url": "https://storage.googleapis.com/louisai/LineBot/種苗二號.jpg",
           "size": "full",
           "aspectRatio": "20:19",
-          "aspectMode": "cover",
-          "action": {
-            "type": "uri",
-            "label": "Action",
-            "uri": "https://linecorp.com/"
-          }
+          "aspectMode": "cover"
         },
         "body": {
           "type": "box",
@@ -651,12 +626,7 @@
           "url": "https://storage.googleapis.com/louisai/LineBot/種苗4號.jpg",
           "size": "full",
           "aspectRatio": "20:13",
-          "aspectMode": "cover",
-          "action": {
-            "type": "uri",
-            "label": "Action",
-            "uri": "https://linecorp.com/"
-          }
+          "aspectMode": "cover"
         },
         "body": {
           "type": "box",
@@ -755,12 +725,7 @@
           "url": "https://storage.googleapis.com/louisai/LineBot/種苗六號.jpg",
           "size": "full",
           "aspectRatio": "20:19",
-          "aspectMode": "fit",
-          "action": {
-            "type": "uri",
-            "label": "Action",
-            "uri": "https://linecorp.com/"
-          }
+          "aspectMode": "fit"
         },
         "body": {
           "type": "box",
@@ -877,12 +842,7 @@
           "url": "https://storage.googleapis.com/louisai/LineBot/大利.png",
           "size": "full",
           "aspectRatio": "20:20",
-          "aspectMode": "cover",
-          "action": {
-            "type": "uri",
-            "label": "Action",
-            "uri": "https://linecorp.com/"
-          }
+          "aspectMode": "cover"
         },
         "body": {
           "type": "box",
@@ -981,12 +941,7 @@
           "url": "https://storage.googleapis.com/louisai/LineBot/大西洋.jpg",
           "size": "full",
           "aspectRatio": "20:13",
-          "aspectMode": "cover",
-          "action": {
-            "type": "uri",
-            "label": "Action",
-            "uri": "https://linecorp.com/"
-          }
+          "aspectMode": "cover"
         },
         "body": {
           "type": "box",
@@ -1107,12 +1062,7 @@
           "url": "https://storage.googleapis.com/louisai/LineBot/紅皮馬玲薯.jpg",
           "size": "full",
           "aspectRatio": "20:14",
-          "aspectMode": "cover",
-          "action": {
-            "type": "uri",
-            "label": "Action",
-            "uri": "https://linecorp.com/"
-          }
+          "aspectMode": "cover"
         },
         "body": {
           "type": "box",
@@ -1240,12 +1190,7 @@
           "url": "https://storage.googleapis.com/louisai/LineBot/褐皮馬鈴薯.jpg",
           "size": "full",
           "aspectRatio": "20:14",
-          "aspectMode": "cover",
-          "action": {
-            "type": "uri",
-            "label": "Action",
-            "uri": "https://linecorp.com/"
-          }
+          "aspectMode": "cover"
         },
         "body": {
           "type": "box",
@@ -1373,12 +1318,7 @@
           "url": "https://storage.googleapis.com/louisai/LineBot/彩色馬鈴薯.jpg",
           "size": "full",
           "aspectRatio": "20:13",
-          "aspectMode": "cover",
-          "action": {
-            "type": "uri",
-            "label": "Action",
-            "uri": "https://linecorp.com/"
-          }
+          "aspectMode": "cover"
         },
         "body": {
           "type": "box",
@@ -1524,15 +1464,10 @@
         },
         "hero": {
           "type": "image",
-          "url": "https://storage.googleapis.com/louisai/LineBot/白玉馬鈴薯.JPG",
+          "url": "https://storage.googleapis.com/louisai/LineBot/%E7%99%BD%E7%8E%89%E9%A6%AC%E9%88%B4%E8%96%AF_2.jpg",
           "size": "full",
-          "aspectRatio": "20:14",
-          "aspectMode": "cover",
-          "action": {
-            "type": "uri",
-            "label": "Action",
-            "uri": "https://linecorp.com/"
-          }
+          "aspectRatio": "20:17",
+          "aspectMode": "cover"
         },
         "body": {
           "type": "box",

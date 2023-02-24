@@ -20,12 +20,7 @@
     "url": "https://storage.googleapis.com/louisai/LineBot/fresh-organic-potatoes-in-a-white-ceramic-bowl-with-herbs-free-photo.jpg",
     "size": "full",
     "aspectRatio": "20:13",
-    "aspectMode": "cover",
-    "action": {
-      "type": "uri",
-      "label": "Action",
-      "uri": "https://linecorp.com/"
-    }
+    "aspectMode": "cover"
   },
   "body": {
     "type": "box",
