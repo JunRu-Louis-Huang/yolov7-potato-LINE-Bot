@@ -1,0 +1,185 @@
+{
+    "type": "bubble",
+    "size": "giga",
+    "header": {
+      "type": "box",
+      "layout": "horizontal",
+      "contents": [
+        {
+          "type": "text",
+          "text": "關於瑕疵辨識偵測器",
+          "weight": "bold",
+          "size": "sm",
+          "color": "#AAAAAA",
+          "contents": []
+        }
+      ]
+    },
+    "hero": {
+      "type": "image",
+      "url": "https://storage.googleapis.com/louisai/LineBot/圖片2.jpg",
+      "size": "full",
+      "aspectRatio": "20:14",
+      "aspectMode": "fit"
+    },
+    "body": {
+      "type": "box",
+      "layout": "vertical",
+      "spacing": "md",
+      "contents": [
+        {
+          "type": "box",
+          "layout": "horizontal",
+          "contents": [
+            {
+              "type": "text",
+              "text": "訓練資料",
+              "weight": "bold",
+              "color": "#1E7D73FF",
+              "flex": 1,
+              "wrap": true,
+              "contents": []
+            },
+            {
+              "type": "box",
+              "layout": "vertical",
+              "flex": 4,
+              "contents": [
+                {
+                  "type": "text",
+                  "text": "蒐集時間自2022年12月至2023年2月，於雲林有機農場、雙北各大超市及大賣場、台北農產銷售中心等。多以台灣「台農1號」黃金馬鈴薯、美國進口馬鈴薯為瑕疵資料來源。",
+                  "wrap": true,
+                  "contents": []
+                },
+                {
+                  "type": "text",
+                  "text": "資料2,389張照片，21,656筆標註資訊，以 YOLOv7 模型為基礎，分別將 v7、v7-tiny、v7-W6、v7-X、v7-E6、v7-D6、v7-E6E等基礎模型進行遷移學習(transfer learning)比較。",
+                  "wrap": true,
+                  "contents": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "box",
+          "layout": "horizontal",
+          "contents": [
+            {
+              "type": "text",
+              "text": "模型準確度(mAP@.5)",
+              "weight": "bold",
+              "color": "#1E7D73FF",
+              "flex": 1,
+              "wrap": true,
+              "contents": []
+            },
+            {
+              "type": "box",
+              "layout": "vertical",
+              "flex": 2,
+              "contents": [
+                {
+                  "type": "text",
+                  "text": "All: 0.553",
+                  "wrap": true,
+                  "contents": []
+                },
+                {
+                  "type": "text",
+                  "text": "馬鈴薯: 0.951",
+                  "contents": []
+                },
+                {
+                  "type": "text",
+                  "text": "發芽: 0.867",
+                  "contents": []
+                },
+                {
+                  "type": "text",
+                  "text": "發綠: 0.317",
+                  "contents": []
+                },
+                {
+                  "type": "text",
+                  "text": "發黑: 0.456",
+                  "contents": []
+                }
+              ]
+            },
+            {
+              "type": "box",
+              "layout": "vertical",
+              "flex": 2,
+              "contents": [
+                {
+                  "type": "filler"
+                },
+                {
+                  "type": "text",
+                  "text": "白絹病: 0.564",
+                  "contents": []
+                },
+                {
+                  "type": "text",
+                  "text": "洞: 0.731",
+                  "contents": []
+                },
+                {
+                  "type": "text",
+                  "text": "瘡痂: 0.142",
+                  "contents": []
+                },
+                {
+                  "type": "text",
+                  "text": "畸形: 0.398",
+                  "contents": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "box",
+          "layout": "horizontal",
+          "contents": [
+            {
+              "type": "text",
+              "text": "團隊成員",
+              "weight": "bold",
+              "color": "#1E7D73FF",
+              "flex": 1,
+              "wrap": true,
+              "contents": []
+            },
+            {
+              "type": "box",
+              "layout": "vertical",
+              "flex": 4,
+              "contents": [
+                {
+                  "type": "text",
+                  "text": "Jun-Ru Huang, Ting-Chen Lee, Yu-Lin-Tseng, TL Lee, CHIENYU-HUANG",
+                  "wrap": true,
+                  "contents": []
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "footer": {
+      "type": "box",
+      "layout": "vertical",
+      "contents": [
+        {
+          "type": "text",
+          "text": "Thank You!",
+          "weight": "bold",
+          "align": "center",
+          "contents": []
+        }
+      ]
+    }
+  }

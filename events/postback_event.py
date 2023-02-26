@@ -240,10 +240,19 @@ def test(event):
     line_bot_api.reply_message(
             event.reply_token,
             flex_message)
-    
+def about(event):
+    f = open("./events/about.json", "r", encoding="utf-8")
+    contents_json = json.load(f)
+    flex_message = FlexSendMessage(alt_text='你來到關於我', contents=contents_json)
+    f.close()
+    line_bot_api.reply_message(
+            event.reply_token,
+            flex_message)
+
+
 def manual(event):
     text1 = "本AI辨識結果具一定的準確度，但辨識結果可能受光線、背景等因素影響。\n提醒您，在選購、料理前仍要再檢查是否有發芽、發綠、發霉等瑕疵喔"
-    text2 = "祝您使用愉快。 🙂\n使用後別忘了填寫問卷唷！❤"
+    text2 = "祝您使用愉快。 🙂\n使用後別忘了填寫問卷唷！❤\nhttps://liff.line.me/1657897941-NBqV69qa"
     send_img = ImageSendMessage(  #傳送圖片
                         original_content_url = "https://storage.googleapis.com/louisai/LineBot/%E4%BD%BF%E7%94%A8%E8%AA%AA%E6%98%8Ev2.jpg",
                         preview_image_url = "https://storage.googleapis.com/louisai/LineBot/%E4%BD%BF%E7%94%A8%E8%AA%AA%E6%98%8Ev2.jpg"

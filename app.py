@@ -72,6 +72,7 @@ def handle_message(event):
             sql_cmd = f"""insert into potato.FUNCTION (`USER_ID`, `PREDICT`, `DEFECT`, `CULTIVAR`, `INSTRUCTIONS_FOR_USE`, `ABOUT`)
             values ('{user_id}', 0, 0, 0, 0, 0);"""
             db.engine.execute(sql_cmd)
+            print("新用戶在'PROFILE', 'DESCRIPTION_OF_DEFECTS', 'FUNCTION' Table 建立新的列")
         else:
             print("舊用戶傳送文字訊息")
     except:
@@ -185,11 +186,11 @@ def handle_message(event):
         sql_cmd = f"""update potato.PROFILE set `TIME` = '{time}' where `USER_ID` = '{user_id}';"""
         db.engine.execute(sql_cmd)
 
-    sql_cmd = f"""select `TIME` from potato.USAGE_COUNT where TIME= '{time}';"""
-    query_data = db.engine.execute(sql_cmd)
-    if len(list(query_data)) == 0:
-        sql_cmd = insertDB_USAGE_COUNT(time=time, user_id=user_id)
-        db.engine.execute(sql_cmd)
+    # sql_cmd = f"""select `TIME` from potato.USAGE_COUNT where TIME= '{time}';"""
+    # query_data = db.engine.execute(sql_cmd)
+    # if len(list(query_data)) == 0:
+    #     sql_cmd = insertDB_USAGE_COUNT(time=time, user_id=user_id)
+    #     db.engine.execute(sql_cmd)
         
 
 # image message type 
@@ -493,7 +494,7 @@ def handle_postback(event):
 
     if event.postback.data == "About":
         try:
-            test(event)
+            about(event)
             sql_cmd = updateDB_FUNCTION(user_id, about=1)
             db.engine.execute(sql_cmd)
         except:
@@ -572,38 +573,5 @@ def insertDB_USAGE_COUNT(time, user_id):
 def page():
 	return render_template('questionnaire.html', liffid = liffid)
 
-# @app.route('/test1', methods=['GET','POST'])
-# def test1():
-#     if request.method == 'GET':
-#         return render_template(
-#                             "test1.html",
-#                             liffid = liffid
-#                             )
-#     elif request.method == 'POST':
-#         email = request.values['email']
-#         birthday = request.values['birthday']
-#         gender = request.values['gender']
-#         place_of_purchase = request.values ['place_of_purchase']
-#         defect_type = request.values['defect_type']
-#         print(email, birthday, gender, place_of_purchase, defect_type)
-#         return 'OK'
-    
-# @app.route('/test2', methods=['GET','POST'])
-# def test2():
-#     if request.method == 'GET':
-#         return render_template(
-#                             "test2.html",
-#                             liffid = liffid
-#                             )
-#     elif request.method == 'POST':
-#         email = request.form.get('email')
-#         birthday = request.form.get('birthday')
-#         gender = request.form.get('gender')
-#         place_of_purchase = request.values['place_of_purchase']
-#         other_purchase = request.form.get('other_purchase')
-#         defect_type = request.values['defect_type']
-#         print(email, birthday, gender, place_of_purchase, other_purchase, defect_type)
-#         return 'OK'
-
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run()
