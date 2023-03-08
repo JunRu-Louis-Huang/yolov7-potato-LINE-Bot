@@ -1,259 +1,159 @@
-# Official YOLOv7
+# 馬鈴薯瑕疵檢測－YOLOv7整合LINE Bot應用
 
-Implementation of paper - [YOLOv7: Trainable bag-of-freebies sets new state-of-the-art for real-time object detectors](https://arxiv.org/abs/2207.02696)
+更新日期: 2023-03-08
 
-[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/yolov7-trainable-bag-of-freebies-sets-new/real-time-object-detection-on-coco)](https://paperswithcode.com/sota/real-time-object-detection-on-coco?p=yolov7-trainable-bag-of-freebies-sets-new)
-[![Hugging Face Spaces](https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Spaces-blue)](https://huggingface.co/spaces/akhaliq/yolov7)
-<a href="https://colab.research.google.com/gist/AlexeyAB/b769f5795e65fdab80086f6cb7940dae/yolov7detection.ipynb"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"></a>
-[![arxiv.org](http://img.shields.io/badge/cs.CV-arXiv%3A2207.02696-B31B1B.svg)](https://arxiv.org/abs/2207.02696)
+# 目的：
 
-<div align="center">
-    <a href="./">
-        <img src="./figure/performance.png" width="79%"/>
-    </a>
-</div>
+1. 減少食物中毒的機會發生
+2. 輕鬆挑選馬鈴薯
 
-## Web Demo
+# 任務：
 
-- Integrated into [Huggingface Spaces 🤗](https://huggingface.co/spaces/akhaliq/yolov7) using Gradio. Try out the Web Demo [![Hugging Face Spaces](https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Spaces-blue)](https://huggingface.co/spaces/akhaliq/yolov7)
+- 了解什麼原因造成吃了馬鈴薯後發生食物中毒
+    - 哪些瑕疵造成中毒？
+    - 有哪些常見瑕疵只是賣相不好？
+- 能輕鬆挑選馬鈴薯 → AI要能辨認出瑕疵的狀況
+- 需要整合AI偵測模型落地應用的解決方案
 
-## Performance 
+# 馬鈴薯常見的瑕疵
 
-MS COCO
+## 1. 發芽
 
-| Model | Test Size | AP<sup>test</sup> | AP<sub>50</sub><sup>test</sup> | AP<sub>75</sub><sup>test</sup> | batch 1 fps | batch 32 average time |
-| :-- | :-: | :-: | :-: | :-: | :-: | :-: |
-| [**YOLOv7**](https://github.com/WongKinYiu/yolov7/releases/download/v0.1/yolov7.pt) | 640 | **51.4%** | **69.7%** | **55.9%** | 161 *fps* | 2.8 *ms* |
-| [**YOLOv7-X**](https://github.com/WongKinYiu/yolov7/releases/download/v0.1/yolov7x.pt) | 640 | **53.1%** | **71.2%** | **57.8%** | 114 *fps* | 4.3 *ms* |
-|  |  |  |  |  |  |  |
-| [**YOLOv7-W6**](https://github.com/WongKinYiu/yolov7/releases/download/v0.1/yolov7-w6.pt) | 1280 | **54.9%** | **72.6%** | **60.1%** | 84 *fps* | 7.6 *ms* |
-| [**YOLOv7-E6**](https://github.com/WongKinYiu/yolov7/releases/download/v0.1/yolov7-e6.pt) | 1280 | **56.0%** | **73.5%** | **61.2%** | 56 *fps* | 12.3 *ms* |
-| [**YOLOv7-D6**](https://github.com/WongKinYiu/yolov7/releases/download/v0.1/yolov7-d6.pt) | 1280 | **56.6%** | **74.0%** | **61.8%** | 44 *fps* | 15.0 *ms* |
-| [**YOLOv7-E6E**](https://github.com/WongKinYiu/yolov7/releases/download/v0.1/yolov7-e6e.pt) | 1280 | **56.8%** | **74.4%** | **62.1%** | 36 *fps* | 18.7 *ms* |
+發芽的馬鈴薯不能食用
 
-## Installation
+發芽的馬鈴薯有大量的生物鹼（例如龍葵鹼）造成急性中毒
 
-Docker environment (recommended)
-<details><summary> <b>Expand</b> </summary>
+![Untitled](yololinebotfigure/Untitled.png)
 
-``` shell
-# create the docker container, you can change the share memory size if you have more.
-nvidia-docker run --name yolov7 -it -v your_coco_path/:/coco/ -v your_code_path/:/yolov7 --shm-size=64g nvcr.io/nvidia/pytorch:21.08-py3
+![Untitled](yololinebotfigure/Untitled%201.png)
 
-# apt install required packages
-apt update
-apt install -y zip htop screen libgl1-mesa-glx
+![Untitled](yololinebotfigure/Untitled%202.png)
 
-# pip install required packages
-pip install seaborn thop
+## 2. 發綠
 
-# go to code folder
-cd /yolov7
-```
+發綠的地方不可食用
 
-</details>
+馬鈴薯塊莖變綠，因為栽培、貯藏或運送過程中照射到光線造成，發綠的地方生物鹼含量較高
 
-## Testing
+![Untitled](yololinebotfigure/Untitled%203.png)
 
-[`yolov7.pt`](https://github.com/WongKinYiu/yolov7/releases/download/v0.1/yolov7.pt) [`yolov7x.pt`](https://github.com/WongKinYiu/yolov7/releases/download/v0.1/yolov7x.pt) [`yolov7-w6.pt`](https://github.com/WongKinYiu/yolov7/releases/download/v0.1/yolov7-w6.pt) [`yolov7-e6.pt`](https://github.com/WongKinYiu/yolov7/releases/download/v0.1/yolov7-e6.pt) [`yolov7-d6.pt`](https://github.com/WongKinYiu/yolov7/releases/download/v0.1/yolov7-d6.pt) [`yolov7-e6e.pt`](https://github.com/WongKinYiu/yolov7/releases/download/v0.1/yolov7-e6e.pt)
+![Untitled](yololinebotfigure/Untitled%204.png)
 
-``` shell
-python test.py --data data/coco.yaml --img 640 --batch 32 --conf 0.001 --iou 0.65 --device 0 --weights yolov7.pt --name yolov7_640_val
-```
+## 3. 瘡痂病
 
-You will get the results:
+僅在皮層，不耐貯藏，若無其他瑕疵去皮後可食用
 
-```
- Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.51206
- Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.69730
- Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.55521
- Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.35247
- Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.55937
- Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.66693
- Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.38453
- Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.63765
- Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.68772
- Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.53766
- Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.73549
- Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.83868
-```
+馬鈴薯瘡痂病是由多種菌原菌引起的病害，病斑雖然僅限於皮層，但有瘡痂的馬鈴薯不耐貯藏，外觀賣相較差。如果沒有其他瑕疵，多數去皮後是可以食用的。
 
-To measure accuracy, download [COCO-annotations for Pycocotools](http://images.cocodataset.org/annotations/annotations_trainval2017.zip) to the `./coco/annotations/instances_val2017.json`
+![Untitled](yololinebotfigure/Untitled%205.png)
 
-## Training
+![Untitled](yololinebotfigure/Untitled%206.png)
 
-Data preparation
+![Untitled](yololinebotfigure/Untitled%207.png)
 
-``` shell
-bash scripts/get_coco.sh
-```
+## 4. 發黑（褐化）
 
-* Download MS COCO dataset images ([train](http://images.cocodataset.org/zips/train2017.zip), [val](http://images.cocodataset.org/zips/val2017.zip), [test](http://images.cocodataset.org/zips/test2017.zip)) and [labels](https://github.com/WongKinYiu/yolov7/releases/download/v0.1/coco2017labels-segments.zip). If you have previously used a different version of YOLO, we strongly recommend that you delete `train2017.cache` and `val2017.cache` files, and redownload [labels](https://github.com/WongKinYiu/yolov7/releases/download/v0.1/coco2017labels-segments.zip) 
+若無其他瑕疵或病害，可食用（仍需謹慎）
 
-Single GPU training
+在儲藏過程經低溫冷藏，適合馬鈴薯貯存溫度1~3℃為佳，但若低於0°C以下就會凍傷。而凍傷後的馬鈴薯，外皮部分看似透明，內部卻會發黑腐爛。馬鈴薯含有酵素和多酚類基質，而多酚類基質受到酵素作用而氧化後，便會使顏色產生變化。外皮有受損或將馬鈴薯切開、接觸到空氣暴露一段時間後會顏色會變深
 
-``` shell
-# train p5 models
-python train.py --workers 8 --device 0 --batch-size 32 --data data/coco.yaml --img 640 640 --cfg cfg/training/yolov7.yaml --weights '' --name yolov7 --hyp data/hyp.scratch.p5.yaml
+![Untitled](yololinebotfigure/Untitled%208.png)
 
-# train p6 models
-python train_aux.py --workers 8 --device 0 --batch-size 16 --data data/coco.yaml --img 1280 1280 --cfg cfg/training/yolov7-w6.yaml --weights '' --name yolov7-w6 --hyp data/hyp.scratch.p6.yaml
-```
+![Untitled](yololinebotfigure/Untitled%209.png)
 
-Multiple GPU training
+## 5. 坑洞
 
-``` shell
-# train p5 models
-python -m torch.distributed.launch --nproc_per_node 4 --master_port 9527 train.py --workers 8 --device 0,1,2,3 --sync-bn --batch-size 128 --data data/coco.yaml --img 640 640 --cfg cfg/training/yolov7.yaml --weights '' --name yolov7 --hyp data/hyp.scratch.p5.yaml
+若有腐爛則不可食用
 
-# train p6 models
-python -m torch.distributed.launch --nproc_per_node 8 --master_port 9527 train_aux.py --workers 8 --device 0,1,2,3,4,5,6,7 --sync-bn --batch-size 128 --data data/coco.yaml --img 1280 1280 --cfg cfg/training/yolov7-w6.yaml --weights '' --name yolov7-w6 --hyp data/hyp.scratch.p6.yaml
-```
+有些洞為蟲蛀，易造成俗稱的爛坑。若外皮呈較透明的黑坑，是因為冷凍所致。
 
-## Transfer learning
+![Untitled](yololinebotfigure/Untitled%2010.png)
 
-[`yolov7_training.pt`](https://github.com/WongKinYiu/yolov7/releases/download/v0.1/yolov7_training.pt) [`yolov7x_training.pt`](https://github.com/WongKinYiu/yolov7/releases/download/v0.1/yolov7x_training.pt) [`yolov7-w6_training.pt`](https://github.com/WongKinYiu/yolov7/releases/download/v0.1/yolov7-w6_training.pt) [`yolov7-e6_training.pt`](https://github.com/WongKinYiu/yolov7/releases/download/v0.1/yolov7-e6_training.pt) [`yolov7-d6_training.pt`](https://github.com/WongKinYiu/yolov7/releases/download/v0.1/yolov7-d6_training.pt) [`yolov7-e6e_training.pt`](https://github.com/WongKinYiu/yolov7/releases/download/v0.1/yolov7-e6e_training.pt)
+![Untitled](yololinebotfigure/Untitled%2011.png)
 
-Single GPU finetuning for custom dataset
+## 6. 畸形（外型不規則）
 
-``` shell
-# finetune p5 models
-python train.py --workers 8 --device 0 --batch-size 32 --data data/custom.yaml --img 640 640 --cfg cfg/training/yolov7-custom.yaml --weights 'yolov7_training.pt' --name yolov7-custom --hyp data/hyp.scratch.custom.yaml
+若無其他瑕疵或病害，可食用
 
-# finetune p6 models
-python train_aux.py --workers 8 --device 0 --batch-size 16 --data data/custom.yaml --img 1280 1280 --cfg cfg/training/yolov7-w6-custom.yaml --weights 'yolov7-w6_training.pt' --name yolov7-w6-custom --hyp data/hyp.scratch.custom.yaml
-```
+因高溫乾旱等不良條件，使正在膨大的塊莖停止生長，表皮木栓化。此時如再遇雨或灌溉，給予了適宜的生長條件，但由於塊莖表皮已經木栓化，不能繼續生長，只能從生理活性強的芽眼處二次生長，而形成了各種形狀不規則的馬鈴薯。
 
-## Re-parameterization
+![Untitled](yololinebotfigure/Untitled%2012.png)
 
-See [reparameterization.ipynb](tools/reparameterization.ipynb)
+![Untitled](yololinebotfigure/Untitled%2013.png)
 
-## Inference
+## 7. 白絹病（或發霉）
 
-On video:
-``` shell
-python detect.py --weights yolov7.pt --conf 0.25 --img-size 640 --source yourvideo.mp4
-```
+不可食用
 
-On image:
-``` shell
-python detect.py --weights yolov7.pt --conf 0.25 --img-size 640 --source inference/images/horses.jpg
-```
+在生長過程中感染了植物病原真菌，造成馬鈴薯白絹病，上面的白毛，是發病嚴重時期的病原菌的菌絲
 
-<div align="center">
-    <a href="./">
-        <img src="./figure/horses_prediction.jpg" width="59%"/>
-    </a>
-</div>
+![Untitled](yololinebotfigure/Untitled%2014.png)
 
+![Untitled](yololinebotfigure/Untitled%2015.png)
 
-## Export
+![Untitled](yololinebotfigure/Untitled%2016.png)
 
-**Pytorch to CoreML (and inference on MacOS/iOS)** <a href="https://colab.research.google.com/github/WongKinYiu/yolov7/blob/main/tools/YOLOv7CoreML.ipynb"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"></a>
+# 設定辨識型態
 
-**Pytorch to ONNX with NMS (and inference)** <a href="https://colab.research.google.com/github/WongKinYiu/yolov7/blob/main/tools/YOLOv7onnx.ipynb"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"></a>
-```shell
-python export.py --weights yolov7-tiny.pt --grid --end2end --simplify \
-        --topk-all 100 --iou-thres 0.65 --conf-thres 0.35 --img-size 640 640 --max-wh 640
-```
+- 只限定馬鈴薯
+- 完整未切過
+- 單顆、多顆均可
+- 有無簡易清潔過均可
 
-**Pytorch to TensorRT with NMS (and inference)** <a href="https://colab.research.google.com/github/WongKinYiu/yolov7/blob/main/tools/YOLOv7trt.ipynb"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"></a>
+# 以YOLOv7訓練瑕疵辨識的物件偵測模型
 
-```shell
-wget https://github.com/WongKinYiu/yolov7/releases/download/v0.1/yolov7-tiny.pt
-python export.py --weights ./yolov7-tiny.pt --grid --end2end --simplify --topk-all 100 --iou-thres 0.65 --conf-thres 0.35 --img-size 640 640
-git clone https://github.com/Linaom1214/tensorrt-python.git
-python ./tensorrt-python/export.py -o yolov7-tiny.onnx -e yolov7-tiny-nms.trt -p fp16
-```
+不採用影像分類，因無法解決多瑕疵物件、多顆馬鈴薯的問題，而採YOLOv7 物件偵測模型，亦可直接呈現瑕疵位置。
 
-**Pytorch to TensorRT another way** <a href="https://colab.research.google.com/gist/AlexeyAB/fcb47ae544cf284eb24d8ad8e880d45c/yolov7trtlinaom.ipynb"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"></a> <details><summary> <b>Expand</b> </summary>
+## 訓練資料
 
+蒐集時間自2022年12月至2023年2月，於雲林的有機農場、雙北各大超市及大賣場、農產銷售中心等。多以台灣「台農1號」黃金馬鈴薯、美國進口馬鈴薯為瑕疵資料來源。
 
-```shell
-wget https://github.com/WongKinYiu/yolov7/releases/download/v0.1/yolov7-tiny.pt
-python export.py --weights yolov7-tiny.pt --grid --include-nms
-git clone https://github.com/Linaom1214/tensorrt-python.git
-python ./tensorrt-python/export.py -o yolov7-tiny.onnx -e yolov7-tiny-nms.trt -p fp16
+資料2,389張照片，21,656筆標註資訊，以 YOLOv7 模型為基礎，分別將 v7、v7-tiny、v7-W6、v7-X、v7-E6、v7-D6、v7-E6E等基礎模型進行遷移學習(transfer learning)比較。
 
-# Or use trtexec to convert ONNX to TensorRT engine
-/usr/src/tensorrt/bin/trtexec --onnx=yolov7-tiny.onnx --saveEngine=yolov7-tiny-nms.trt --fp16
-```
+![圖片2.jpg](yololinebotfigure/%25E5%259C%2596%25E7%2589%25872.jpg)
 
-</details>
+# 整合YOLOv7模型及行動化應用
 
-Tested with: Python 3.7.13, Pytorch 1.12.0+cu113
+![Untitled](yololinebotfigure/Untitled%2017.png)
 
-## Pose estimation
+# LINE Bot功能
 
-[`code`](https://github.com/WongKinYiu/yolov7/tree/pose) [`yolov7-w6-pose.pt`](https://github.com/WongKinYiu/yolov7/releases/download/v0.1/yolov7-w6-pose.pt)
+![Untitled](yololinebotfigure/Untitled%2018.png)
 
-See [keypoint.ipynb](https://github.com/WongKinYiu/yolov7/blob/main/tools/keypoint.ipynb).
+# 結果呈現
 
-<div align="center">
-    <a href="./">
-        <img src="./figure/pose.png" width="39%"/>
-    </a>
-</div>
+**A. 有偵測到瑕疵，回傳瑕疵標示照片及文字**
 
+![Screenshot_20230225-144804935.png](yololinebotfigure/Screenshot_20230225-144804935.png)
 
-## Instance segmentation
+![17715430509039.jpeg](yololinebotfigure/17715430509039.jpeg)
 
-[`code`](https://github.com/WongKinYiu/yolov7/tree/mask) [`yolov7-mask.pt`](https://github.com/WongKinYiu/yolov7/releases/download/v0.1/yolov7-mask.pt)
+**B. 沒有偵測到瑕疵**
 
-See [instance.ipynb](https://github.com/WongKinYiu/yolov7/blob/main/tools/instance.ipynb).
+![979708.jpg](yololinebotfigure/979708.jpg)
 
-<div align="center">
-    <a href="./">
-        <img src="./figure/mask.png" width="59%"/>
-    </a>
-</div>
+**C. 上傳的照片沒有馬鈴薯**
 
+![Untitled](yololinebotfigure/Untitled%2019.png)
 
-## Citation
+回覆請重新上傳
 
-```
-@article{wang2022yolov7,
-  title={{YOLOv7}: Trainable bag-of-freebies sets new state-of-the-art for real-time object detectors},
-  author={Wang, Chien-Yao and Bochkovskiy, Alexey and Liao, Hong-Yuan Mark},
-  journal={arXiv preprint arXiv:2207.02696},
-  year={2022}
-}
-```
+# 後記
 
+從拍攝照片、前處理、到產出模型並整合模型以及LINE Bot 的應用，歷經大約兩個月的時間，看到呈現結果還不錯，且在賣場中實際協助到辨識的功能，至少有達成預設協助辨識的目標。未來時間允許下或許可以再嘗試整合及時辨識的手機APP邊緣運算開發，擴展及時辨識的應用。
 
-## Teaser
+---
+YOLOv7 原始程式
 
-Yolov7-semantic & YOLOv7-panoptic & YOLOv7-caption
+YOLOv7 Fork repo 來源: [pHidayatullah/yolov7](https://github.com/pHidayatullah/yolov7) 
 
-<div align="center">
-    <a href="./">
-        <img src="./figure/tennis.jpg" width="24%"/>
-    </a>
-    <a href="./">
-        <img src="./figure/tennis_semantic.jpg" width="24%"/>
-    </a>
-    <a href="./">
-        <img src="./figure/tennis_panoptic.png" width="24%"/>
-    </a>
-    <a href="./">
-        <img src="./figure/tennis_caption.png" width="24%"/>
-    </a>
-</div>
+原始 YOLOv7 程式碼 forked from [WongKinYiu/yolov7](https://github.com/WongKinYiu/yolov7)
 
+---
+(其他沒有寫在程式中的) <br>
+致謝
 
-## Acknowledgements
-
-<details><summary> <b>Expand</b> </summary>
-
-* [https://github.com/AlexeyAB/darknet](https://github.com/AlexeyAB/darknet)
-* [https://github.com/WongKinYiu/yolor](https://github.com/WongKinYiu/yolor)
-* [https://github.com/WongKinYiu/PyTorch_YOLOv4](https://github.com/WongKinYiu/PyTorch_YOLOv4)
-* [https://github.com/WongKinYiu/ScaledYOLOv4](https://github.com/WongKinYiu/ScaledYOLOv4)
-* [https://github.com/Megvii-BaseDetection/YOLOX](https://github.com/Megvii-BaseDetection/YOLOX)
-* [https://github.com/ultralytics/yolov3](https://github.com/ultralytics/yolov3)
-* [https://github.com/ultralytics/yolov5](https://github.com/ultralytics/yolov5)
-* [https://github.com/DingXiaoH/RepVGG](https://github.com/DingXiaoH/RepVGG)
-* [https://github.com/JUGGHM/OREPA_CVPR2022](https://github.com/JUGGHM/OREPA_CVPR2022)
-* [https://github.com/TexasInstruments/edgeai-yolov5/tree/yolo-pose](https://github.com/TexasInstruments/edgeai-yolov5/tree/yolo-pose)
-
-</details>
+- Ting-Chen Lee: 照片標註方法、YOLO模型訓練數據實驗、程式端Potato 偵測閾值的設定及建議
+- Yu-Lin-Tseng: 資料庫架設
+- TL Lee: 各項LINE Bot 行為分析
+- CHIEN-YU HWANG: GCP部署
